@@ -1,0 +1,9 @@
+citHeader("To cite the CausalInvestData package in publications, use:")
+
+citEntry(entry = "Manual",
+  title = "CausalInvestData: Simulated Datasets for Causal Inference in Investment Management",
+  author = person("Edzai", "Conilias Zvobwo", role = c("aut", "cre"), email = "edzai@acalytica.com"),
+  year = "2025",
+  note = "R package version 0.1.0",
+  url = "https://github.com/edzai/CausalInvestData"
+)
