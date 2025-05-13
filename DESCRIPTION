@@ -11,3 +11,4 @@ LazyData: false
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Suggests: knitr, rmarkdown, MatchIt
+URL: https://edzai.github.io/CausalInvestData/
