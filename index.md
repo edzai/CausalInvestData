@@ -26,7 +26,11 @@ It is ideal for:
 
 ### 🚀 Start Exploring
 
+<<<<<<< HEAD
 Visit the [Articles](https://edzai.github.io/CausalInvestData/articles/index.html) to begin applying modern causal inference techniques with ready-to-run R code.
+=======
+Visit the [Articles](/articles/index.html) to begin applying modern causal inference techniques with ready-to-run R code.
+>>>>>>> d3f5981e5ac0547f4993fb9b00ea0fcc5ffdd320
 
 ---
 
