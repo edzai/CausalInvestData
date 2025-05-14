@@ -8,6 +8,7 @@ articles:
   dags-and-assumptions: dags-and-assumptions.html
   data-visuals: data-visuals.html
   difference-in-differences: difference-in-differences.html
+  double-machine-learning: double-machine-learning.html
   front-door-criterion: front-door-criterion.html
   heterogeneous-effects: heterogeneous-effects.html
   instrumental-variables: instrumental-variables.html
@@ -17,4 +18,4 @@ articles:
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
   synthetic-control-methods: synthetic-control-methods.html
-last_built: 2025-05-14T03:04Z
+last_built: 2025-05-14T03:12Z

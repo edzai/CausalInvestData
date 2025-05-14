@@ -65,6 +65,9 @@ articles:
   - title: Synthetic Control Methods
     contents:
       - synthetic-control-methods
+  - title: Double Machine Learning
+    contents:
+      - double-machine-learning
 
 reference:
   - title: Datasets
@@ -74,3 +77,5 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
+
+      
