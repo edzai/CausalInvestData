@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 home:
   title: CausalInvestData
   tagline: Simulated Datasets for Causal Inference in Investment Management
@@ -29,3 +30,9 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
+=======
+url: https://edzai.github.io/CausalInvestData/
+template:
+  bootstrap: 5
+
+>>>>>>> ea41305dafb9cb580aa27a441588b4b9b90152e1
