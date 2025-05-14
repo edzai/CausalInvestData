@@ -1,82 +1,18 @@
 ---
-title: "Double Machine Learning (DML) for Causal Inference"
-output: rmarkdown::html_document
+title: "Double Machine Learning"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Double Machine Learning}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# Double Machine Learning
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-library(dplyr)
-library(ggplot2)
-library(glmnet)
-library(caret)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🤖 Double Machine Learning (DML)
+## Overview of Double Machine Learning
 
-Double Machine Learning (DML) uses flexible machine learning models to estimate nuisance parameters (e.g., propensity scores, outcome models) and removes their bias via **orthogonalization**, enabling valid causal inference.
-
----
-
-## 1. 🧪 Simulate Data with Confounding
-
-```{r}
-set.seed(123)
-n <- 1000
-
-X1 <- rnorm(n)
-X2 <- rnorm(n)
-W <- rbinom(n, 1, prob = plogis(0.5 * X1 + 0.5 * X2))
-Y <- 2 * W + 1.5 * X1 + 1.0 * X2 + rnorm(n)
-
-df <- data.frame(X1, X2, W, Y)
-```
-
----
-
-## 2. 🔍 DML Steps
-
-### (a) Split into folds
-
-```{r}
-folds <- createFolds(df$Y, k = 2)
-train1 <- df[folds[[1]], ]
-train2 <- df[folds[[2]], ]
-```
-
-### (b) Estimate nuisance functions
-
-```{r}
-# Outcome model: Y ~ X1 + X2 (train2 on train1)
-y_model <- cv.glmnet(as.matrix(train1[, c("X1", "X2")]), train1$Y)
-m_Y2 <- predict(y_model, as.matrix(train2[, c("X1", "X2")]), s = "lambda.min")
-
-# Treatment model: W ~ X1 + X2
-w_model <- cv.glmnet(as.matrix(train1[, c("X1", "X2")]), train1$W, family = "binomial")
-m_W2 <- predict(w_model, as.matrix(train2[, c("X1", "X2")]), s = "lambda.min", type = "response")
-```
-
-### (c) Orthogonalization
-
-```{r}
-res_Y <- train2$Y - m_Y2
-res_W <- train2$W - m_W2
-
-alpha_hat <- coef(lm(res_Y ~ res_W))[2]
-cat("Estimated Treatment Effect (DML):", round(alpha_hat, 3))
-```
-
----
-
-## ✅ Summary
-
-Double Machine Learning:
-- Uses ML to estimate nuisance models (Y|X and W|X)
-- Debiases via residual-on-residual regression
-- Yields valid causal estimates with flexible modeling
-
----
-
-## 📖 References
-
-- Chernozhukov et al. (2018). *Double/Debiased Machine Learning for Treatment and Structural Parameters*
-- Athey & Imbens (2019). *Machine Learning and Econometrics*
+Content goes here...

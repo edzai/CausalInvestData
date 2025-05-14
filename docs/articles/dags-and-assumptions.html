@@ -5,19 +5,19 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>DAGs and Assumptions in Causal Inference • CausalInvestData</title>
+<title>DAGs and Assumptions • CausalInvestData</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="DAGs and Assumptions in Causal Inference">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="DAGs and Assumptions">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
     <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
-    hero.html
+
     <a class="navbar-brand me-2" href="../index.html">CausalInvestData</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
@@ -49,7 +49,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>DAGs and Assumptions in Causal Inference</h1>
+      <h1>DAGs and Assumptions</h1>
             
       
 
@@ -59,88 +59,13 @@
     
     
 <div class="section level2">
-<h2 id="dags-and-assumptions-in-causal-inference">🔗 DAGs and Assumptions in Causal Inference<a class="anchor" aria-label="anchor" href="#dags-and-assumptions-in-causal-inference"></a>
+<h2 id="dags-and-assumptions">DAGs and Assumptions<a class="anchor" aria-label="anchor" href="#dags-and-assumptions"></a>
 </h2>
-<p>Directed Acyclic Graphs (DAGs) provide a powerful way to encode
-assumptions about how variables in your system are related.</p>
-<p>They help us: - Identify confounders and mediators - Test
-identification strategies - Derive adjustment sets</p>
-<hr>
+<div class="section level3">
+<h3 id="overview-of-dags-and-assumptions">Overview of DAGs and Assumptions<a class="anchor" aria-label="anchor" href="#overview-of-dags-and-assumptions"></a>
+</h3>
+<p>Content goes here…</p>
 </div>
-<div class="section level2">
-<h2 id="define-a-simple-dag">🎯 Define a Simple DAG<a class="anchor" aria-label="anchor" href="#define-a-simple-dag"></a>
-</h2>
-<p>Let’s say we’re estimating the effect of <code>Treatment</code> on
-<code>Outcome</code>, with a confounder <code>X</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dag</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span><span class="st">"dag {</span></span>
-<span><span class="st">  X -&gt; Treatment</span></span>
-<span><span class="st">  X -&gt; Outcome</span></span>
-<span><span class="st">  Treatment -&gt; Outcome</span></span>
-<span><span class="st">}"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dag</span><span class="op">)</span></span></code></pre></div>
-<p><img src="dags-and-assumptions_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="adjustment-sets">📚 Adjustment Sets<a class="anchor" aria-label="anchor" href="#adjustment-sets"></a>
-</h2>
-<p>Which variables do we need to control for to identify the causal
-effect of <code>Treatment</code> on <code>Outcome</code>?</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">adjustmentSets</span><span class="op">(</span><span class="va">dag</span>, exposure <span class="op">=</span> <span class="st">"Treatment"</span>, outcome <span class="op">=</span> <span class="st">"Outcome"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## { X }</span></span></code></pre>
-<p>This shows that adjusting for <code>X</code> is sufficient.</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="more-complex-dag">🧠 More Complex DAG<a class="anchor" aria-label="anchor" href="#more-complex-dag"></a>
-</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">complex_dag</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span><span class="st">"dag {</span></span>
-<span><span class="st">  Age -&gt; Treatment</span></span>
-<span><span class="st">  Income -&gt; Treatment</span></span>
-<span><span class="st">  Age -&gt; Outcome</span></span>
-<span><span class="st">  Income -&gt; Outcome</span></span>
-<span><span class="st">  Treatment -&gt; Behavior -&gt; Outcome</span></span>
-<span><span class="st">  unobserved1 [unobserved]</span></span>
-<span><span class="st">  unobserved1 -&gt; Income</span></span>
-<span><span class="st">  unobserved1 -&gt; Outcome</span></span>
-<span><span class="st">}"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ggdag</span><span class="fu">::</span><span class="fu"><a href="https://r-causal.github.io/ggdag/reference/ggdag.html" class="external-link">ggdag</a></span><span class="op">(</span><span class="va">complex_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="dags-and-assumptions_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"DAG with Confounding and Mediation"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $title</span></span>
-<span><span class="co">## [1] "DAG with Confounding and Mediation"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## attr(,"class")</span></span>
-<span><span class="co">## [1] "labels"</span></span></code></pre>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="summary">✅ Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<p>DAGs help us: - Encode our <strong>causal assumptions</strong> -
-Identify valid <strong>adjustment strategies</strong> - Prevent common
-pitfalls like <strong>conditioning on colliders</strong></p>
-<p>Learning to draw and analyze DAGs is a core skill for any causal
-analyst.</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="references">📖 References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<ul>
-<li>Textor et al. (2016). <em>dagitty: Graphical Analysis of Structural
-Causal Models</em>
-</li>
-<li>Pearl (2009). <em>Causality: Models, Reasoning, and
-Inference</em>
-</li>
-</ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -1,78 +1,18 @@
 ---
-title: "Difference-in-Differences (DiD): Simulated Example"
-output: rmarkdown::html_document
+title: "Difference-in-Differences"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Difference-in-Differences}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# Difference-in-Differences
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 📊 Difference-in-Differences (DiD)
+## Overview of Difference-in-Differences
 
-DiD is a popular method to estimate causal effects using **panel or repeated cross-sectional data** before and after a treatment is applied to one group but not another.
-
----
-
-## 1. ✨ Simulate DiD Setup
-
-```{r}
-set.seed(123)
-n <- 1000
-group <- rep(c("control", "treatment"), each = n/2)
-time <- rep(c("pre", "post"), times = n/2)
-treated <- ifelse(group == "treatment" & time == "post", 1, 0)
-
-baseline <- rnorm(n)
-Y <- 2 * treated + 0.5 * as.numeric(group == "treatment") + 
-     0.3 * as.numeric(time == "post") + baseline + rnorm(n, 0, 0.5)
-
-df <- data.frame(group, time, treated, Y)
-head(df)
-```
-
----
-
-## 2. 📈 Visualize Group-Time Means
-
-```{r}
-df_summary <- df %>%
-  group_by(group, time) %>%
-  summarise(mean_Y = mean(Y), .groups = "drop")
-
-ggplot(df_summary, aes(x = time, y = mean_Y, group = group, color = group))
-  geom_line(size = 1.2)
-  geom_point(size = 2)
-  labs(title = "Group-Time Averages", y = "Mean Outcome", x = "Time")
-  theme_minimal()
-```
-
----
-
-## 3. 🧮 Estimate DiD Effect
-
-```{r}
-df$time_num <- ifelse(df$time == "post", 1, 0)
-df$group_num <- ifelse(df$group == "treatment", 1, 0)
-
-did_model <- lm(Y ~ group_num * time_num, data = df)
-summary(did_model)
-```
-
-The coefficient on `group_num:time_num` is the **DiD estimate**.
-
----
-
-## ✅ Assumptions
-
-- **Parallel Trends**: Control and treatment groups would evolve similarly in absence of treatment
-- **No Spillover Effects**
-- **No Anticipation**
-
----
-
-## 📖 References
-
-- Angrist & Pischke (2009). *Mostly Harmless Econometrics*
-- Bertrand, Duflo, Mullainathan (2004). *How Much Should We Trust Differences-in-Differences Estimates?*
+Content goes here...

@@ -1,88 +1,18 @@
 ---
-title: "Sensitivity Analysis: How Robust Is Your Causal Inference?"
-output: rmarkdown::html_document
+title: "Sensitivity Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Sensitivity Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# Sensitivity Analysis
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(ggplot2)
-# Optional: Uncomment to use sensemakr
-# install.packages("sensemakr")
-# library(sensemakr)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🎯 Sensitivity Analysis: Why It Matters
+## Overview of Sensitivity Analysis
 
-Even when using careful matching or regression, unobserved confounding may bias our treatment effect estimates. Sensitivity analysis helps us **quantify how much unobserved bias would be required** to nullify our results.
-
----
-
-## 1. 🧪 Simulate Confounded Data
-
-```{r}
-set.seed(123)
-n <- 1000
-
-U <- rnorm(n)  # unobserved confounder
-X <- rbinom(n, 1, prob = plogis(0.3 * U))  # treatment depends on U
-Y <- 2 * X + 1.5 * U + rnorm(n)  # outcome depends on X and U
-
-data <- data.frame(X, Y, U)
-```
-
----
-
-## 2. ⚠️ Naive Regression (No U Adjustment)
-
-```{r}
-naive_model <- lm(Y ~ X, data = data)
-summary(naive_model)
-```
-
----
-
-## 3. 📏 True Model with U (for comparison)
-
-```{r}
-true_model <- lm(Y ~ X + U, data = data)
-summary(true_model)
-```
-
----
-
-## 4. 📉 Sensitivity with Manual Bias Factor
-
-We'll manually simulate how adding different levels of confounding changes the treatment effect:
-
-```{r}
-bias_sim <- data.frame(
-  rho = seq(0, 1, by = 0.05)
-) %>%
-  mutate(
-    bias = rho * sd(U),
-    adjusted_beta = coef(naive_model)[["X"]] - bias
-  )
-
-ggplot(bias_sim, aes(x = rho, y = adjusted_beta))
-  geom_line(color = "steelblue", size = 1)
-  geom_hline(yintercept = coef(true_model)[["X"]], linetype = "dashed", color = "red")
-  labs(title = "Effect of Unobserved Confounding on Estimated Treatment Effect",
-       x = "Assumed Correlation with U (rho)", y = "Adjusted Beta for X")
-  theme_minimal()
-```
-
----
-
-## ✅ Summary
-
-Sensitivity analysis gives us a **range of possible estimates** under different assumptions about unobserved confounders. It helps answer:
-
-> "How strong would the unobserved confounding need to be to explain away my effect?"
-
----
-
-## 📖 References
-
-- Cinelli & Hazlett (2020). *Making sense of sensitivity: Extending omitted variable bias.*
-- Rosenbaum (2002). *Observational Studies.*
+Content goes here...

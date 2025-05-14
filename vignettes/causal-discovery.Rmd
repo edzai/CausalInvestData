@@ -1,108 +1,18 @@
 ---
-title: "Causal Discovery with DAGitty and Simulated Data"
-output: rmarkdown::html_document
+title: "Causal Discovery"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Causal Discovery}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# Causal Discovery
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dagitty)
-library(ggdag)
-library(dplyr)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🧭 Causal Discovery: Learning Structure from Data
+## Overview of Causal Discovery
 
-Causal discovery aims to **infer the causal structure** (i.e. DAG) from observational data. This is useful when domain knowledge is limited or exploratory analysis is needed.
-
----
-
-## 1. ✨ Simulate Data with Known DAG
-
-```{r}
-set.seed(123)
-n <- 1000
-
-X <- rnorm(n)
-Z <- 0.6 * X + rnorm(n)
-Y <- 0.5 * Z + 0.3 * X + rnorm(n)
-
-df <- data.frame(X, Z, Y)
-head(df)
-```
-
----
-
-## 2. 🧠 Define the True DAG
-
-```{r}
-true_dag <- dagitty("dag {
-  X -> Z -> Y
-  X -> Y
-}")
-
-ggdag(true_dag, layout = "circle")
-  ggtitle("True DAG Used to Generate Data")
-```
-
----
-
-## 3. 🔍 Use `localTests()` to Test Dependencies
-
-We use `dagitty::localTests()` to test conditional independence statements implied by a candidate DAG:
-
-```{r}
-test_result <- localTests(true_dag, data = df, type = "cis")
-test_result
-```
-
-Each row checks whether a conditional independence assumption holds (p > 0.05 supports the claim).
-
----
-
-## 4. 🧪 Try an Incorrect DAG
-
-```{r}
-wrong_dag <- dagitty("dag {
-  Z -> X
-  Z -> Y
-  X -> Y
-}")
-
-ggdag(wrong_dag, layout = "circle")
-  ggtitle("Incorrect DAG Assumption")
-```
-
-Now test:
-
-```{r}
-localTests(wrong_dag, data = df, type = "cis")
-```
-
-Look for failed assumptions (very low p-values).
-
----
-
-## 🧠 Assumptions for Causal Discovery
-
-- **Causal Sufficiency**: All common causes are measured
-- **Faithfulness**: Statistical independence reflects causal structure
-- **No Measurement Error**
-
----
-
-## ✅ Summary
-
-Causal discovery lets us:
-- Explore structures with little prior knowledge
-- Validate assumptions
-- Compare competing causal hypotheses
-
-`dagitty` provides a simple entry point. For algorithmic discovery, explore `pcalg`, `bnlearn`, or `cdcs`.
-
----
-
-## 📖 References
-
-- Textor et al. (2016). *dagitty: Graphical Analysis of Structural Causal Models*
-- Spirtes, Glymour, Scheines (2000). *Causation, Prediction, and Search*
+Content goes here...

@@ -5,19 +5,19 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Causal Discovery with DAGitty and Simulated Data • CausalInvestData</title>
+<title>Causal Discovery • CausalInvestData</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Causal Discovery with DAGitty and Simulated Data">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Causal Discovery">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
     <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
-    hero.html
+
     <a class="navbar-brand me-2" href="../index.html">CausalInvestData</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
@@ -49,7 +49,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Causal Discovery with DAGitty and Simulated Data</h1>
+      <h1>Causal Discovery</h1>
             
       
 
@@ -59,130 +59,13 @@
     
     
 <div class="section level2">
-<h2 id="causal-discovery-learning-structure-from-data">🧭 Causal Discovery: Learning Structure from Data<a class="anchor" aria-label="anchor" href="#causal-discovery-learning-structure-from-data"></a>
+<h2 id="causal-discovery">Causal Discovery<a class="anchor" aria-label="anchor" href="#causal-discovery"></a>
 </h2>
-<p>Causal discovery aims to <strong>infer the causal structure</strong>
-(i.e. DAG) from observational data. This is useful when domain knowledge
-is limited or exploratory analysis is needed.</p>
-<hr>
+<div class="section level3">
+<h3 id="overview-of-causal-discovery">Overview of Causal Discovery<a class="anchor" aria-label="anchor" href="#overview-of-causal-discovery"></a>
+</h3>
+<p>Content goes here…</p>
 </div>
-<div class="section level2">
-<h2 id="simulate-data-with-known-dag">1. ✨ Simulate Data with Known DAG<a class="anchor" aria-label="anchor" href="#simulate-data-with-known-dag"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span></span>
-<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fl">0.6</span> <span class="op">*</span> <span class="va">X</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">Z</span> <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> <span class="va">X</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">Z</span>, <span class="va">Y</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##             X          Z          Y</span></span>
-<span><span class="co">## 1 -0.56047565 -1.3320841 -1.3457885</span></span>
-<span><span class="co">## 2 -0.23017749 -1.1780615 -0.4211461</span></span>
-<span><span class="co">## 3  1.55870831  0.9172447  0.3846457</span></span>
-<span><span class="co">## 4  0.07050839 -0.0898701  1.1954451</span></span>
-<span><span class="co">## 5  0.12928774 -2.4717701 -1.0229629</span></span>
-<span><span class="co">## 6  1.71506499  2.0696124  0.9340574</span></span></code></pre>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="define-the-true-dag">2. 🧠 Define the True DAG<a class="anchor" aria-label="anchor" href="#define-the-true-dag"></a>
-</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">true_dag</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span><span class="st">"dag {</span></span>
-<span><span class="st">  X -&gt; Z -&gt; Y</span></span>
-<span><span class="st">  X -&gt; Y</span></span>
-<span><span class="st">}"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ggdag</span><span class="op">(</span><span class="va">true_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="causal-discovery_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"True DAG Used to Generate Data"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $title</span></span>
-<span><span class="co">## [1] "True DAG Used to Generate Data"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## attr(,"class")</span></span>
-<span><span class="co">## [1] "labels"</span></span></code></pre>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="use-localtests-to-test-dependencies">3. 🔍 Use <code>localTests()</code> to Test Dependencies<a class="anchor" aria-label="anchor" href="#use-localtests-to-test-dependencies"></a>
-</h2>
-<p>We use <code><a href="https://rdrr.io/pkg/dagitty/man/localTests.html" class="external-link">dagitty::localTests()</a></code> to test conditional
-independence statements implied by a candidate DAG:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">test_result</span> <span class="op">&lt;-</span> <span class="fu">localTests</span><span class="op">(</span><span class="va">true_dag</span>, data <span class="op">=</span> <span class="va">df</span>, type <span class="op">=</span> <span class="st">"cis"</span><span class="op">)</span></span>
-<span><span class="va">test_result</span></span></code></pre></div>
-<pre><code><span><span class="co">## data frame with 0 columns and 0 rows</span></span></code></pre>
-<p>Each row checks whether a conditional independence assumption holds
-(p &gt; 0.05 supports the claim).</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="try-an-incorrect-dag">4. 🧪 Try an Incorrect DAG<a class="anchor" aria-label="anchor" href="#try-an-incorrect-dag"></a>
-</h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wrong_dag</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span><span class="st">"dag {</span></span>
-<span><span class="st">  Z -&gt; X</span></span>
-<span><span class="st">  Z -&gt; Y</span></span>
-<span><span class="st">  X -&gt; Y</span></span>
-<span><span class="st">}"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ggdag</span><span class="op">(</span><span class="va">wrong_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="causal-discovery_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Incorrect DAG Assumption"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $title</span></span>
-<span><span class="co">## [1] "Incorrect DAG Assumption"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## attr(,"class")</span></span>
-<span><span class="co">## [1] "labels"</span></span></code></pre>
-<p>Now test:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">localTests</span><span class="op">(</span><span class="va">wrong_dag</span>, data <span class="op">=</span> <span class="va">df</span>, type <span class="op">=</span> <span class="st">"cis"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## data frame with 0 columns and 0 rows</span></span></code></pre>
-<p>Look for failed assumptions (very low p-values).</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="assumptions-for-causal-discovery">🧠 Assumptions for Causal Discovery<a class="anchor" aria-label="anchor" href="#assumptions-for-causal-discovery"></a>
-</h2>
-<ul>
-<li>
-<strong>Causal Sufficiency</strong>: All common causes are
-measured</li>
-<li>
-<strong>Faithfulness</strong>: Statistical independence reflects
-causal structure</li>
-<li><strong>No Measurement Error</strong></li>
-</ul>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="summary">✅ Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<p>Causal discovery lets us: - Explore structures with little prior
-knowledge - Validate assumptions - Compare competing causal
-hypotheses</p>
-<p><code>dagitty</code> provides a simple entry point. For algorithmic
-discovery, explore <code>pcalg</code>, <code>bnlearn</code>, or
-<code>cdcs</code>.</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="references">📖 References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<ul>
-<li>Textor et al. (2016). <em>dagitty: Graphical Analysis of Structural
-Causal Models</em>
-</li>
-<li>Spirtes, Glymour, Scheines (2000). <em>Causation, Prediction, and
-Search</em>
-</li>
-</ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

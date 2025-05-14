@@ -1,113 +1,18 @@
 ---
-title: "Simulating Causal Data: A Step-by-Step Guide"
-output: rmarkdown::html_document
+title: "Simulate Causal Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulate Causal Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# Simulate Causal Data
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🧪 Why Simulate Causal Data?
+## Overview of Simulating Causal Data
 
-Simulating data helps us **validate assumptions** and understand the behavior of causal estimators under controlled conditions. It’s also a great tool for teaching.
-
----
-
-## 1. 🎲 Simulate Covariates
-
-```{r}
-set.seed(123)
-n <- 1000
-
-X1 <- rnorm(n, mean = 50, sd = 10)       # Age
-X2 <- rbinom(n, 1, 0.5)                  # Gender (0/1)
-X3 <- rnorm(n, mean = 50000, sd = 15000) # Income
-
-covariates <- data.frame(X1, X2, X3)
-head(covariates)
-```
-
----
-
-## 2. 🧮 Simulate Treatment Assignment
-
-We use a logistic model for treatment assignment based on covariates:
-
-```{r}
-logit <- -3 + 0.05 * X1 + 0.8 * X2 - 0.00002 * X3
-prob_treat <- 1 / (1 + exp(-logit))
-W <- rbinom(n, 1, prob_treat)
-```
-
----
-
-## 3. ✨ Define Potential Outcomes
-
-```{r}
-Y0 <- 0.5 * X1 + 2 * X2 + rnorm(n, 0, 5)
-Y1 <- Y0 + 5  # Treatment adds 5 units
-```
-
----
-
-## 4. 📊 Create Observed Outcome
-
-```{r}
-Y_obs <- ifelse(W == 1, Y1, Y0)
-
-data <- covariates %>%
-  mutate(treatment = W,
-         Y0 = Y0,
-         Y1 = Y1,
-         Y_obs = Y_obs)
-
-head(data)
-```
-
----
-
-## 5. 📏 Estimate True vs. Observed Effects
-
-```{r}
-true_ate <- mean(Y1 - Y0)
-est_ate <- mean(data$Y_obs[data$treatment == 1]) - mean(data$Y_obs[data$treatment == 0])
-
-cat("True ATE:", round(true_ate, 2), "\n")
-cat("Estimated ATE (unadjusted):", round(est_ate, 2), "\n")
-```
-
----
-
-## 6. 📉 Visualize Propensity Score Overlap
-
-```{r}
-data$prop_score <- prob_treat
-
-ggplot(data, aes(x = prop_score, fill = factor(treatment)))
-  geom_density(alpha = 0.5)
-  labs(title = "Propensity Score Overlap",
-       x = "Propensity Score", fill = "Treatment")
-  theme_minimal()
-```
-
----
-
-## ✅ Summary
-
-We created:
-- Covariates
-- Treatment assignment (non-random)
-- Two potential outcomes (Y0, Y1)
-- Observed outcomes
-- ATE comparison
-
-Simulating data helps you test models, teach concepts, and better understand bias and variance in causal analysis.
-
----
-
-## 📖 References
-
-- Hernán & Robins (2020). *Causal Inference: What If.*
-- Pearl (2009). *Causality.*
+Content goes here...

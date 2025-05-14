@@ -1,86 +1,18 @@
 ---
-title: "DAGs and Assumptions in Causal Inference"
-output: rmarkdown::html_document
+title: "DAGs and Assumptions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DAGs and Assumptions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# DAGs and Assumptions
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dagitty)
-library(ggdag)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🔗 DAGs and Assumptions in Causal Inference
+## Overview of DAGs and Assumptions
 
-Directed Acyclic Graphs (DAGs) provide a powerful way to encode assumptions about how variables in your system are related.
-
-They help us:
-- Identify confounders and mediators
-- Test identification strategies
-- Derive adjustment sets
-
----
-
-## 🎯 Define a Simple DAG
-
-Let’s say we're estimating the effect of `Treatment` on `Outcome`, with a confounder `X`.
-
-```{r}
-dag <- dagitty("dag {
-  X -> Treatment
-  X -> Outcome
-  Treatment -> Outcome
-}")
-
-plot(dag)
-```
-
----
-
-## 📚 Adjustment Sets
-
-Which variables do we need to control for to identify the causal effect of `Treatment` on `Outcome`?
-
-```{r}
-adjustmentSets(dag, exposure = "Treatment", outcome = "Outcome")
-```
-
-This shows that adjusting for `X` is sufficient.
-
----
-
-## 🧠 More Complex DAG
-
-```{r}
-complex_dag <- dagitty("dag {
-  Age -> Treatment
-  Income -> Treatment
-  Age -> Outcome
-  Income -> Outcome
-  Treatment -> Behavior -> Outcome
-  unobserved1 [unobserved]
-  unobserved1 -> Income
-  unobserved1 -> Outcome
-}")
-
-ggdag::ggdag(complex_dag, layout = "circle")
-  ggtitle("DAG with Confounding and Mediation")
-```
-
----
-
-## ✅ Summary
-
-DAGs help us:
-- Encode our **causal assumptions**
-- Identify valid **adjustment strategies**
-- Prevent common pitfalls like **conditioning on colliders**
-
-Learning to draw and analyze DAGs is a core skill for any causal analyst.
-
----
-
-## 📖 References
-
-- Textor et al. (2016). *dagitty: Graphical Analysis of Structural Causal Models*
-- Pearl (2009). *Causality: Models, Reasoning, and Inference*
+Content goes here...

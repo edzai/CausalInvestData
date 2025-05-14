@@ -1,85 +1,18 @@
 ---
-title: "Instrumental Variables with Simulated Data"
-output: rmarkdown::html_document
+title: "Instrumental Variables"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Instrumental Variables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+# Instrumental Variables
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(ggplot2)
-library(AER)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🎯 Instrumental Variables with Simulated Data
+## Overview of Instrumental Variables
 
-Instrumental Variables (IV) help identify causal effects when there is unobserved confounding. An instrument affects the treatment but has no direct path to the outcome.
-
----
-
-## 1. 🧪 Simulate Confounded Data
-
-```{r}
-set.seed(123)
-n <- 1000
-
-U <- rnorm(n)  # unobserved confounder
-Z <- rbinom(n, 1, 0.5)  # instrument
-X <- 0.5 * Z + 0.7 * U + rnorm(n)  # treatment, influenced by instrument and confounder
-Y <- 2 * X + 1 * U + rnorm(n)      # outcome, influenced by treatment and confounder
-
-data <- data.frame(Y, X, Z, U)
-head(data)
-```
-
----
-
-## 2. ⚠️ OLS is Biased Due to Unobserved Confounding
-
-```{r}
-ols_model <- lm(Y ~ X, data = data)
-summary(ols_model)
-```
-
----
-
-## 3. ✅ Use IV: Estimate via `ivreg`
-
-```{r}
-iv_model <- ivreg(Y ~ X | Z, data = data)
-summary(iv_model)
-```
-
----
-
-## 4. 📊 Visualize the First Stage (Z → X)
-
-```{r}
-ggplot(data, aes(x = factor(Z), y = X))
-  geom_boxplot(fill = "skyblue")
-  labs(title = "First Stage: Instrument Z Effect on Treatment X", x = "Instrument (Z)", y = "Treatment (X)")
-  theme_minimal()
-```
-
----
-
-## 5. ✅ IV Assumptions Recap
-
-- **Relevance**: Z is correlated with X ✔️
-- **Exclusion Restriction**: Z does not directly affect Y ❌ (U must not be affected by Z)
-- **Independence**: Z is independent of unmeasured confounders (U)
-
----
-
-## 📌 Summary
-
-| Method | Coefficient on X | Notes |
-|--------|------------------|-------|
-| OLS    | Likely biased     | Confounded by U |
-| IV     | Unbiased if valid | Uses Z to isolate exogenous variation |
-
----
-
-## 📖 References
-
-- Angrist & Pischke (2009). *Mostly Harmless Econometrics*
-- Wooldridge (2010). *Econometric Analysis of Cross Section and Panel Data*
+Content goes here...

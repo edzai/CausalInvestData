@@ -11,9 +11,5 @@ LazyData: true
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Suggests: knitr, rmarkdown, MatchIt
-Imports:
-  MASS,
-  mediation,
-  dplyr,
-  ggplot2
+
 

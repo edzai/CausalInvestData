@@ -5,19 +5,19 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Covariate Balance Diagnostics in Causal Inference • CausalInvestData</title>
+<title>Covariate Balance Diagnostics • CausalInvestData</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Covariate Balance Diagnostics in Causal Inference">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Covariate Balance Diagnostics">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
     <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
-    hero.html
+
     <a class="navbar-brand me-2" href="../index.html">CausalInvestData</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
@@ -49,7 +49,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Covariate Balance Diagnostics in Causal Inference</h1>
+      <h1>Covariate Balance Diagnostics</h1>
             
       
 
@@ -59,103 +59,13 @@
     
     
 <div class="section level2">
-<h2 id="covariate-balance-diagnostics">⚖️ Covariate Balance Diagnostics<a class="anchor" aria-label="anchor" href="#covariate-balance-diagnostics"></a>
+<h2 id="covariate-balance-diagnostics">Covariate Balance Diagnostics<a class="anchor" aria-label="anchor" href="#covariate-balance-diagnostics"></a>
 </h2>
-<p>Ensuring that covariates are balanced across treatment groups is
-critical for reducing bias in causal inference. Diagnostics help verify
-whether matching or weighting strategies have achieved this.</p>
-<hr>
+<div class="section level3">
+<h3 id="overview-of-covariate-balance-diagnostics">Overview of Covariate Balance Diagnostics<a class="anchor" aria-label="anchor" href="#overview-of-covariate-balance-diagnostics"></a>
+</h3>
+<p>Content goes here…</p>
 </div>
-<div class="section level2">
-<h2 id="simulate-confounded-data">1. 🧪 Simulate Confounded Data<a class="anchor" aria-label="anchor" href="#simulate-confounded-data"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span></span>
-<span><span class="va">X1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="va">X2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="va">logit_p</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">+</span> <span class="fl">0.7</span> <span class="op">*</span> <span class="va">X1</span> <span class="op">+</span> <span class="fl">1.2</span> <span class="op">*</span> <span class="va">X2</span></span>
-<span><span class="va">p_treat</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">logit_p</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">1</span>, <span class="va">p_treat</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fl">3</span> <span class="op">*</span> <span class="va">W</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">X1</span> <span class="op">+</span> <span class="fl">0.8</span> <span class="op">*</span> <span class="va">X2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">X1</span>, <span class="va">X2</span>, <span class="va">W</span>, <span class="va">Y</span><span class="op">)</span></span></code></pre></div>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="perform-propensity-score-matching">2. 🎯 Perform Propensity Score Matching<a class="anchor" aria-label="anchor" href="#perform-propensity-score-matching"></a>
-</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">match_model</span> <span class="op">&lt;-</span> <span class="fu">matchit</span><span class="op">(</span><span class="va">W</span> <span class="op">~</span> <span class="va">X1</span> <span class="op">+</span> <span class="va">X2</span>, data <span class="op">=</span> <span class="va">data</span>, method <span class="op">=</span> <span class="st">"nearest"</span>, distance <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">match_model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Call:</span></span>
-<span><span class="co">## matchit(formula = W ~ X1 + X2, data = data, method = "nearest", </span></span>
-<span><span class="co">##     distance = "logit")</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Summary of Balance for All Data:</span></span>
-<span><span class="co">##          Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean</span></span>
-<span><span class="co">## distance        0.6128        0.4582          0.8838     0.8746    0.2245</span></span>
-<span><span class="co">## X1              0.2922       -0.3106          0.6420     0.9700    0.1739</span></span>
-<span><span class="co">## X2              0.6125        0.3537          0.5313          .    0.2588</span></span>
-<span><span class="co">##          eCDF Max</span></span>
-<span><span class="co">## distance   0.3342</span></span>
-<span><span class="co">## X1         0.2779</span></span>
-<span><span class="co">## X2         0.2588</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Summary of Balance for Matched Data:</span></span>
-<span><span class="co">##          Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean</span></span>
-<span><span class="co">## distance        0.6643        0.4582          1.1782     0.5242    0.3023</span></span>
-<span><span class="co">## X1              0.4617       -0.3106          0.8225     0.8641    0.2261</span></span>
-<span><span class="co">## X2              0.7096        0.3537          0.7305          .    0.3559</span></span>
-<span><span class="co">##          eCDF Max Std. Pair Dist.</span></span>
-<span><span class="co">## distance   0.4803          1.1782</span></span>
-<span><span class="co">## X1         0.3865          1.0319</span></span>
-<span><span class="co">## X2         0.3559          0.8829</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Sample Sizes:</span></span>
-<span><span class="co">##           Control Treated</span></span>
-<span><span class="co">## All           458     542</span></span>
-<span><span class="co">## Matched       458     458</span></span>
-<span><span class="co">## Unmatched       0      84</span></span>
-<span><span class="co">## Discarded       0       0</span></span></code></pre>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="balance-diagnostics-with-cobalt">3. 📊 Balance Diagnostics with <code>cobalt</code><a class="anchor" aria-label="anchor" href="#balance-diagnostics-with-cobalt"></a>
-</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">love.plot</span><span class="op">(</span><span class="va">match_model</span>, binary <span class="op">=</span> <span class="st">"std"</span>, var.order <span class="op">=</span> <span class="st">"unadjusted"</span>,</span>
-<span>          abs <span class="op">=</span> <span class="cn">TRUE</span>, thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
-<span>          title <span class="op">=</span> <span class="st">"Covariate Balance Before and After Matching"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="covariate-balance-diagnostics_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="interpreting-balance-metrics">4. ✅ Interpreting Balance Metrics<a class="anchor" aria-label="anchor" href="#interpreting-balance-metrics"></a>
-</h2>
-<ul>
-<li>
-<strong>Standardized Mean Differences (SMD)</strong>: &lt; 0.1
-considered balanced</li>
-<li>Look for reduction in SMD after matching</li>
-<li>Avoid overfitting and extreme weights</li>
-</ul>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="references">📖 References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<ul>
-<li>Austin (2009). <em>Balance diagnostics for comparing the
-distribution of baseline covariates using standardized
-differences</em>
-</li>
-<li>Stuart (2010). <em>Matching Methods for Causal Inference: A Review
-and a Look Forward</em>
-</li>
-</ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
