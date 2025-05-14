@@ -19,6 +19,9 @@ articles:
   - title: Introduction
     contents:
       - intro
+  - title: Dataset Visualizations
+    contents:
+      - data-visuals
 
 reference:
   - title: Datasets
