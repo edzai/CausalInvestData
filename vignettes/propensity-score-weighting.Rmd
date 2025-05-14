@@ -68,10 +68,10 @@ summary(model_psw)
 ## 5. 📊 Visualize Propensity Score Overlap
 
 ```{r}
-ggplot(data, aes(x = pscore, fill = factor(W))) +
-  geom_density(alpha = 0.5) +
+ggplot(data, aes(x = pscore, fill = factor(W)))
+  geom_density(alpha = 0.5)
   labs(title = "Propensity Score Distribution by Treatment",
-       x = "Propensity Score", fill = "Treatment") +
+       x = "Propensity Score", fill = "Treatment")
   theme_minimal()
 ```
 

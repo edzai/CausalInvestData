@@ -51,11 +51,11 @@ group_summary %>%
 
 ```{r}
 group_summary %>%
-  ggplot(aes(x = factor(beta_group), y = mean_return, fill = factor(treatment))) +
-  geom_col(position = "dodge") +
+  ggplot(aes(x = factor(beta_group), y = mean_return, fill = factor(treatment)))
+  geom_col(position = "dodge")
   labs(title = "Returns by Treatment Across Beta Groups",
        x = "Beta Quantile Group", y = "Mean Return",
-       fill = "Treatment") +
+       fill = "Treatment")
   theme_minimal()
 ```
 

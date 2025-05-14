@@ -16,10 +16,10 @@ library(tidyr)
 ```{r}
 data("fund_performance")
 
-ggplot(fund_performance, aes(x = return, fill = factor(treatment))) +
-  geom_histogram(alpha = 0.7, bins = 40, position = "identity") +
+ggplot(fund_performance, aes(x = return, fill = factor(treatment)))
+  geom_histogram(alpha = 0.7, bins = 40, position = "identity")
   labs(title = "Distribution of Fund Returns by Treatment",
-       x = "Return", y = "Count", fill = "Treatment") +
+       x = "Return", y = "Count", fill = "Treatment")
   theme_minimal()
 ```
 
@@ -40,9 +40,9 @@ data("macro_shocks")
 
 macro_shocks %>%
   pivot_longer(cols = c("interest_rate", "gdp_growth", "market_index")) %>%
-  ggplot(aes(x = date, y = value, color = name)) +
-  geom_line() +
-  facet_wrap(~ name, scales = "free_y") +
-  theme_minimal() +
+  ggplot(aes(x = date, y = value, color = name))
+  geom_line()
+  facet_wrap(~ name, scales = "free_y")
+  theme_minimal()
   labs(title = "Macro Shocks Over Time", y = "Value", x = "Date")
 ```

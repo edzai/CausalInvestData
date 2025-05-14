@@ -63,7 +63,7 @@ complex_dag <- dagitty("dag {
   unobserved1 -> Outcome
 }")
 
-ggdag::ggdag(complex_dag, layout = "circle") +
+ggdag::ggdag(complex_dag, layout = "circle")
   ggtitle("DAG with Confounding and Mediation")
 ```
 

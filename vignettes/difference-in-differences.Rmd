@@ -41,10 +41,10 @@ df_summary <- df %>%
   group_by(group, time) %>%
   summarise(mean_Y = mean(Y), .groups = "drop")
 
-ggplot(df_summary, aes(x = time, y = mean_Y, group = group, color = group)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 2) +
-  labs(title = "Group-Time Averages", y = "Mean Outcome", x = "Time") +
+ggplot(df_summary, aes(x = time, y = mean_Y, group = group, color = group))
+  geom_line(size = 1.2)
+  geom_point(size = 2)
+  labs(title = "Group-Time Averages", y = "Mean Outcome", x = "Time")
   theme_minimal()
 ```
 

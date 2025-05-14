@@ -59,18 +59,18 @@ cat("Estimated Front-door Effect:", round(frontdoor_effect, 2))
 ## 4. 📈 Visualize Causal Chain
 
 ```{r}
-ggplot(df, aes(x = X, y = M)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Path A: Treatment to Mediator", x = "Treatment (X)", y = "Mediator (M)") +
+ggplot(df, aes(x = X, y = M))
+  geom_point(alpha = 0.4)
+  geom_smooth(method = "lm", se = FALSE)
+  labs(title = "Path A: Treatment to Mediator", x = "Treatment (X)", y = "Mediator (M)")
   theme_minimal()
 ```
 
 ```{r}
-ggplot(df, aes(x = M, y = Y)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Path B: Mediator to Outcome", x = "Mediator (M)", y = "Outcome (Y)") +
+ggplot(df, aes(x = M, y = Y))
+  geom_point(alpha = 0.4)
+  geom_smooth(method = "lm", se = FALSE)
+  labs(title = "Path B: Mediator to Outcome", x = "Mediator (M)", y = "Outcome (Y)")
   theme_minimal()
 ```
 

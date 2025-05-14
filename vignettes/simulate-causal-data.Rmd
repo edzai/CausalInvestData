@@ -85,10 +85,10 @@ cat("Estimated ATE (unadjusted):", round(est_ate, 2), "\n")
 ```{r}
 data$prop_score <- prob_treat
 
-ggplot(data, aes(x = prop_score, fill = factor(treatment))) +
-  geom_density(alpha = 0.5) +
+ggplot(data, aes(x = prop_score, fill = factor(treatment)))
+  geom_density(alpha = 0.5)
   labs(title = "Propensity Score Overlap",
-       x = "Propensity Score", fill = "Treatment") +
+       x = "Propensity Score", fill = "Treatment")
   theme_minimal()
 ```
 

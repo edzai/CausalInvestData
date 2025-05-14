@@ -34,12 +34,12 @@ head(df)
 ## 2. 📊 Visualize the Discontinuity
 
 ```{r}
-ggplot(df, aes(x = age, y = Y, color = factor(treatment))) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", se = FALSE) +
-  geom_vline(xintercept = 60, linetype = "dashed", color = "red") +
+ggplot(df, aes(x = age, y = Y, color = factor(treatment)))
+  geom_point(alpha = 0.5)
+  geom_smooth(method = "lm", se = FALSE)
+  geom_vline(xintercept = 60, linetype = "dashed", color = "red")
   labs(title = "Sharp Regression Discontinuity at Age 60",
-       x = "Age", y = "Outcome", color = "Treatment") +
+       x = "Age", y = "Outcome", color = "Treatment")
   theme_minimal()
 ```
 

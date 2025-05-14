@@ -49,9 +49,9 @@ Check matched data:
 
 ```{r}
 matched_data <- match.data(psm)
-ggplot(matched_data, aes(x = return, fill = factor(treatment))) +
-  geom_density(alpha = 0.5) +
-  labs(title = "Return Distribution After Matching", fill = "Treatment") +
+ggplot(matched_data, aes(x = return, fill = factor(treatment)))
+  geom_density(alpha = 0.5)
+  labs(title = "Return Distribution After Matching", fill = "Treatment")
   theme_minimal()
 ```
 

@@ -38,11 +38,11 @@ df <- data.frame(X1, X2, X3, W, Y)
 ## 2. 📈 Visualize True Heterogeneous Effect
 
 ```{r}
-ggplot(data.frame(X1, tau), aes(x = X1, y = tau)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(se = FALSE) +
+ggplot(data.frame(X1, tau), aes(x = X1, y = tau))
+  geom_point(alpha = 0.4)
+  geom_smooth(se = FALSE)
   labs(title = "True Heterogeneous Treatment Effect by X1",
-       x = "X1", y = "Treatment Effect (tau)") +
+       x = "X1", y = "Treatment Effect (tau)")
   theme_minimal()
 ```
 
@@ -63,11 +63,11 @@ tau_hat <- colMeans(bcf_fit$tau)
 ## 4. 🧪 Compare Estimated vs. True Effects
 
 ```{r eval=FALSE}
-ggplot(data.frame(True = tau, Estimated = tau_hat), aes(x = True, y = Estimated)) +
-  geom_point(alpha = 0.4) +
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+ggplot(data.frame(True = tau, Estimated = tau_hat), aes(x = True, y = Estimated))
+  geom_point(alpha = 0.4)
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red")
   labs(title = "True vs. Estimated Treatment Effects",
-       x = "True Effect", y = "Estimated Effect") +
+       x = "True Effect", y = "Estimated Effect")
   theme_minimal()
 ```
 

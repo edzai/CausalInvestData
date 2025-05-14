@@ -43,9 +43,9 @@ head(df)
 ## 2. 📈 Plot Treated vs. Controls Over Time
 
 ```{r}
-ggplot(df, aes(x = year, y = Y, group = unit, color = unit == 1)) +
-  geom_line() +
-  labs(title = "Treated Unit vs Controls Over Time", color = "Treated") +
+ggplot(df, aes(x = year, y = Y, group = unit, color = unit == 1))
+  geom_line()
+  labs(title = "Treated Unit vs Controls Over Time", color = "Treated")
   theme_minimal()
 ```
 
@@ -80,10 +80,10 @@ synth_df <- left_join(actual_post, synth_post, by = "year")
 ## 4. 📊 Plot Synthetic vs. Treated
 
 ```{r}
-ggplot(synth_df, aes(x = year)) +
-  geom_line(aes(y = Y), color = "blue", size = 1.2) +
-  geom_line(aes(y = synth_Y), color = "orange", linetype = "dashed", size = 1.2) +
-  labs(title = "Synthetic Control vs Treated Unit (Post-2010)", y = "Outcome", x = "Year") +
+ggplot(synth_df, aes(x = year))
+  geom_line(aes(y = Y), color = "blue", size = 1.2)
+  geom_line(aes(y = synth_Y), color = "orange", linetype = "dashed", size = 1.2)
+  labs(title = "Synthetic Control vs Treated Unit (Post-2010)", y = "Outcome", x = "Year")
   theme_minimal()
 ```
 

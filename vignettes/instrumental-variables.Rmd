@@ -54,9 +54,9 @@ summary(iv_model)
 ## 4. 📊 Visualize the First Stage (Z → X)
 
 ```{r}
-ggplot(data, aes(x = factor(Z), y = X)) +
-  geom_boxplot(fill = "skyblue") +
-  labs(title = "First Stage: Instrument Z Effect on Treatment X", x = "Instrument (Z)", y = "Treatment (X)") +
+ggplot(data, aes(x = factor(Z), y = X))
+  geom_boxplot(fill = "skyblue")
+  labs(title = "First Stage: Instrument Z Effect on Treatment X", x = "Instrument (Z)", y = "Treatment (X)")
   theme_minimal()
 ```
 

@@ -41,7 +41,7 @@ true_dag <- dagitty("dag {
   X -> Y
 }")
 
-ggdag(true_dag, layout = "circle") +
+ggdag(true_dag, layout = "circle")
   ggtitle("True DAG Used to Generate Data")
 ```
 
@@ -69,7 +69,7 @@ wrong_dag <- dagitty("dag {
   X -> Y
 }")
 
-ggdag(wrong_dag, layout = "circle") +
+ggdag(wrong_dag, layout = "circle")
   ggtitle("Incorrect DAG Assumption")
 ```
 

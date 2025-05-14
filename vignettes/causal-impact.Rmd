@@ -40,11 +40,11 @@ macro_shocks <- macro_shocks %>%
 ## 📈 Plot the Time Series
 
 ```{r}
-ggplot(macro_shocks, aes(x = date, y = market_index)) +
-  geom_line() +
-  geom_vline(xintercept = macro_shocks$date[80], linetype = "dashed", color = "red") +
+ggplot(macro_shocks, aes(x = date, y = market_index))
+  geom_line()
+  geom_vline(xintercept = macro_shocks$date[80], linetype = "dashed", color = "red")
   labs(title = "Market Index with Simulated Intervention at Month 80",
-       x = "Date", y = "Market Index") +
+       x = "Date", y = "Market Index")
   theme_minimal()
 ```
 
@@ -59,11 +59,11 @@ post_data <- macro_shocks %>% filter(intervention == 1)
 model <- lm(market_index ~ interest_rate + gdp_growth, data = pre_data)
 post_data$predicted <- predict(model, newdata = post_data)
 
-ggplot(post_data, aes(x = date)) +
-  geom_line(aes(y = market_index), color = "blue") +
-  geom_line(aes(y = predicted), color = "orange", linetype = "dashed") +
+ggplot(post_data, aes(x = date))
+  geom_line(aes(y = market_index), color = "blue")
+  geom_line(aes(y = predicted), color = "orange", linetype = "dashed")
   labs(title = "Observed vs Counterfactual Post-Intervention",
-       y = "Market Index", x = "Date") +
+       y = "Market Index", x = "Date")
   theme_minimal()
 ```
 
