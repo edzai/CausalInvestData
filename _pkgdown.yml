@@ -5,6 +5,8 @@ home:
 template:
   bootstrap: 5
   bootswatch: flatly
+  includes:
+    after_body: analytics.html
 
 navbar:
   structure:

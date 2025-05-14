@@ -51,7 +51,7 @@
 <blockquote>
 <p>Simulated datasets for causal inference in institutional investment management.</p>
 </blockquote>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD <code>CausalInvestData</code> provides realistic datasets to help researchers and analysts test causal inference methods such as matching, propensity score weighting, causal forests, and time-series modeling in a financial context.</p>
+<p><code>CausalInvestData</code> provides realistic datasets to help researchers and analysts test causal inference methods such as matching, propensity score weighting, causal forests, and time-series modeling in a financial context.</p>
 <div class="section level2">
 <h2 id="mag-available-datasets">🔍 Available Datasets<a class="anchor" aria-label="anchor" href="#mag-available-datasets"></a>
 </h2>
@@ -63,10 +63,9 @@
 <li>
 <code>client_behavior</code>: Client demographics, treatment, and churn</li>
 <li>
-<h1 id="macro_shocks-macroeconomic-indicators-and-shocks">
-<code>macro_shocks</code>: Macroeconomic indicators and shocks</h1>
-<code>CausalInvestData</code> provides realistic, structured datasets to help researchers and analysts test causal inference methods such as matching, propensity score weighting, causal forests, and time-series modeling in a financial context.</li>
+<code>macro_shocks</code>: Macroeconomic indicators and shocks</li>
 </ul>
+<p><code>CausalInvestData</code> provides realistic, structured datasets to help researchers and analysts test causal inference methods such as matching, propensity score weighting, causal forests, and time-series modeling in a financial context.</p>
 </div>
 <div class="section level2">
 <h2 id="mag-key-features">🔍 Key Features<a class="anchor" aria-label="anchor" href="#mag-key-features"></a>
@@ -88,43 +87,30 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install development version from GitHub</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"edzai/CausalInvestData"</span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>ea41305dafb9cb580aa27a441588b4b9b90152e1</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 </div>
 <div class="section level2">
 <h2 id="bar_chart-example-usage">📊 Example Usage<a class="anchor" aria-label="anchor" href="#bar_chart-example-usage"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(CausalInvestData)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Load the fund performance data</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"fund_performance"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">head</span>(fund_performance)</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co"># Propensity Score Matching</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">data</span>(fund_performance)</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="fu">head</span>(fund_performance)</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># Estimate treatment effect using matching</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;</span> ea41305dafb9cb580aa27a441588b4b9b90152e1</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="fu">library</span>(MatchIt)</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>m.out <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> market_return <span class="sc">+</span> alpha <span class="sc">+</span> beta, <span class="at">data =</span> fund_performance)</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="fu">summary</span>(m.out)</span></code></pre></div>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## 📁 Dataset Preview</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CausalInvestData</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the fund performance data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"fund_performance"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fund_performance</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Propensity Score Matching</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fund_performance</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fund_performance</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Estimate treatment effect using matching</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kosukeimai.github.io/MatchIt/" class="external-link">MatchIt</a></span><span class="op">)</span></span>
+<span><span class="va">m.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://kosukeimai.github.io/MatchIt/reference/matchit.html" class="external-link">matchit</a></span><span class="op">(</span><span class="va">treatment</span> <span class="op">~</span> <span class="va">market_return</span> <span class="op">+</span> <span class="va">alpha</span> <span class="op">+</span> <span class="va">beta</span>, data <span class="op">=</span> <span class="va">fund_performance</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m.out</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="file_folder-dataset-preview">📁 Dataset Preview<a class="anchor" aria-label="anchor" href="#file_folder-dataset-preview"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"portfolio_allocations"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">portfolio_allocations</span><span class="op">)</span></span>
@@ -144,7 +130,11 @@
 <div class="section level2">
 <h2 id="raised_hands-contributing">🙌 Contributing<a class="anchor" aria-label="anchor" href="#raised_hands-contributing"></a>
 </h2>
-<p>Pull requests and bug reports are welcome at <a href="https://github.com/edzai/CausalInvestData" class="external-link uri">https://github.com/edzai/CausalInvestData</a> ======= ## 📁 Available Datasets</p>
+<p>Pull requests and bug reports are welcome at <a href="https://github.com/edzai/CausalInvestData" class="external-link uri">https://github.com/edzai/CausalInvestData</a></p>
+</div>
+<div class="section level2">
+<h2 id="file_folder-available-datasets">📁 Available Datasets<a class="anchor" aria-label="anchor" href="#file_folder-available-datasets"></a>
+</h2>
 <table class="table">
 <colgroup>
 <col width="35%">
@@ -197,7 +187,7 @@
 <div class="section level2">
 <h2 id="raised_hands-contributing-1">🙌 Contributing<a class="anchor" aria-label="anchor" href="#raised_hands-contributing-1"></a>
 </h2>
-<p>Pull requests, bug reports, and discussions welcome. Open an issue or fork this repo to suggest improvements. &gt;&gt;&gt;&gt;&gt;&gt;&gt; ea41305dafb9cb580aa27a441588b4b9b90152e1</p>
+<p>Pull requests, bug reports, and discussions welcome. Open an issue or fork this repo to suggest improvements.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
@@ -241,7 +231,7 @@
 
 
 
-
+  analytics.html
 
   </body>
 </html>
