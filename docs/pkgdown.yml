@@ -15,9 +15,10 @@ articles:
   heterogeneous-effects: heterogeneous-effects.html
   instrumental-variables: instrumental-variables.html
   intro: intro.html
+  mediation-analysis: mediation-analysis.html
   natural-experiments: natural-experiments.html
   propensity-score-weighting: propensity-score-weighting.html
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
   synthetic-control-methods: synthetic-control-methods.html
-last_built: 2025-05-14T03:20Z
+last_built: 2025-05-14T03:23Z

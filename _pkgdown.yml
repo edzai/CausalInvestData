@@ -74,6 +74,9 @@ articles:
   - title: Bayesian Causal Forests
     contents:
       - bayesian-causal-forests
+  - title: Mediation Analysis
+    contents:
+      - mediation-analysis
 
 reference:
   - title: Datasets
