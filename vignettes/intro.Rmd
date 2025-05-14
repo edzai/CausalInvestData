@@ -14,15 +14,18 @@ library(CausalInvestData)
 
 ## Overview
 
-`CausalInvestData` provides simulated datasets for causal inference in institutional investment management.
+`CausalInvestData` provides simulated datasets for causal inference in institutional investment management. The package includes four core datasets designed to reflect real-world structures, enabling users to prototype, teach, and evaluate methods such as propensity score matching, causal forests, and impact analysis.
+
+---
 
 ## Dataset: `fund_performance`
 
 ```{r}
+data("fund_performance", package = "CausalInvestData")
 head(fund_performance)
 ```
 
-## Propensity Score Matching
+### Propensity Score Matching Example
 
 ```{r}
 library(MatchIt)
@@ -35,17 +38,40 @@ summary(m.out)
 ## Dataset: `portfolio_allocations`
 
 ```{r}
-head(read.csv(system.file("data", "portfolio_allocations.csv", package = "CausalInvestData")))
+data("portfolio_allocations", package = "CausalInvestData")
+head(portfolio_allocations)
 ```
+
+---
 
 ## Dataset: `client_behavior`
 
 ```{r}
-head(read.csv(system.file("data", "client_behavior.csv", package = "CausalInvestData")))
+data("client_behavior", package = "CausalInvestData")
+head(client_behavior)
 ```
+
+---
 
 ## Dataset: `macro_shocks`
 
 ```{r}
-head(read.csv(system.file("data", "macro_shocks.csv", package = "CausalInvestData")))
+data("macro_shocks", package = "CausalInvestData")
+head(macro_shocks)
+```
+
+---
+
+## Summary
+
+This package is ideal for:
+
+- Financial data scientists building causal ML pipelines
+- Academics teaching causal inference methods
+- Practitioners evaluating financial interventions
+
+To cite the package, run:
+
+```{r}
+citation("CausalInvestData")
 ```
