@@ -8,7 +8,6 @@ template:
   bootstrap: 5
   bootswatch: flatly
   includes:
-    before_title: hero.html
     after_body: analytics.html
 
 navbar:
@@ -37,7 +36,6 @@ articles:
 
   - title: Advanced Techniques
     contents:
-      - mediation-analysis
       - double-machine-learning
       - bayesian-causal-forests
       - synthetic-control-methods
@@ -56,4 +54,3 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
-      
