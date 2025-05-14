@@ -13,6 +13,7 @@ articles:
   instrumental-variables: instrumental-variables.html
   intro: intro.html
   natural-experiments: natural-experiments.html
+  propensity-score-weighting: propensity-score-weighting.html
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
-last_built: 2025-05-14T02:49Z
+last_built: 2025-05-14T02:53Z

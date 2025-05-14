@@ -59,6 +59,9 @@ articles:
   - title: Front-door Criterion
     contents:
       - front-door-criterion
+  - title: Propensity Score Weighting
+    contents:
+      - propensity-score-weighting
 
 reference:
   - title: Datasets
