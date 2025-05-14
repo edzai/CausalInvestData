@@ -1,0 +1,22 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/EXPLAINER.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/causal-impact.html</loc></url>
+<url><loc>/articles/causal-methods-overview.html</loc></url>
+<url><loc>/articles/dags-and-assumptions.html</loc></url>
+<url><loc>/articles/data-visuals.html</loc></url>
+<url><loc>/articles/heterogeneous-effects.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/instrumental-variables.html</loc></url>
+<url><loc>/articles/intro.html</loc></url>
+<url><loc>/articles/simulate-causal-data.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/client_behavior.html</loc></url>
+<url><loc>/reference/fund_performance.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/macro_shocks.html</loc></url>
+<url><loc>/reference/portfolio_allocations.html</loc></url>
+</urlset>
+
