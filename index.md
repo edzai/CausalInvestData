@@ -26,7 +26,7 @@ It is ideal for:
 
 ### 🚀 Start Exploring
 
-Visit the [Articles](/articles/) to begin applying modern causal inference techniques with ready-to-run R code.
+Visit the [Articles](/articles/index.html) to begin applying modern causal inference techniques with ready-to-run R code.
 
 ---
 
