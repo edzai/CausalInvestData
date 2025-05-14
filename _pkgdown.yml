@@ -29,6 +29,9 @@ articles:
   - title: Causal Inference Methods
     contents:
       - causal-methods-overview
+  - title: Heterogeneous Effects
+    contents:
+      - heterogeneous-effects
 
 reference:
   - title: Datasets

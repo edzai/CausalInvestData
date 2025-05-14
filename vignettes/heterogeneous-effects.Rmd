@@ -1,0 +1,99 @@
+---
+title: "Heterogeneous Treatment Effects"
+output: rmarkdown::html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(CausalInvestData)
+library(dplyr)
+library(ggplot2)
+```
+
+## 🧪 What Are Heterogeneous Treatment Effects?
+
+Heterogeneous Treatment Effects (HTEs) occur when the impact of a treatment varies across different units or subgroups in the population. In financial decision-making, understanding **who benefits more (or less)** from a given strategy can be more useful than knowing the average effect.
+
+We’ll explore this using the `fund_performance` dataset.
+
+---
+
+## 📦 Load the Data
+
+```{r}
+data("fund_performance")
+head(fund_performance)
+```
+
+Let’s inspect how treatment effects differ by levels of `beta` (a proxy for fund risk exposure):
+
+---
+
+## 📊 Stratify by Fund Beta Quantiles
+
+```{r}
+fund_performance <- fund_performance %>%
+  mutate(beta_group = ntile(beta, 3))  # low, medium, high
+
+group_summary <- fund_performance %>%
+  group_by(beta_group, treatment) %>%
+  summarise(mean_return = mean(return), .groups = "drop")
+
+group_summary %>%
+  tidyr::pivot_wider(names_from = treatment, values_from = mean_return,
+                     names_prefix = "treatment_") %>%
+  mutate(estimated_effect = treatment_1 - treatment_0)
+```
+
+---
+
+## 📈 Visualize Treatment Effects by Risk Exposure
+
+```{r}
+group_summary %>%
+  ggplot(aes(x = factor(beta_group), y = mean_return, fill = factor(treatment))) +
+  geom_col(position = "dodge") +
+  labs(title = "Returns by Treatment Across Beta Groups",
+       x = "Beta Quantile Group", y = "Mean Return",
+       fill = "Treatment") +
+  theme_minimal()
+```
+
+---
+
+## 🌲 Optional: Use Causal Forests (`grf`)
+
+If you have the `grf` package installed, you can run:
+
+```r
+# Uncomment and install if needed
+# install.packages("grf")
+
+# library(grf)
+# X <- fund_performance %>% select(market_return, alpha, beta)
+# Y <- fund_performance$return
+# W <- fund_performance$treatment
+# forest <- causal_forest(X, Y, W)
+# tau_hat <- predict(forest)$predictions
+# hist(tau_hat, breaks = 30, main = "Estimated Treatment Effects (GRF)", xlab = "tau_hat")
+```
+
+---
+
+## ✅ Summary
+
+| Subgroup (by beta) | Estimated Effect |
+|--------------------|------------------|
+| Low beta funds     | ?                |
+| Mid beta funds     | ?                |
+| High beta funds    | ?                |
+
+Even without advanced ML, subgroup analysis reveals **important insights** on how treatments work differently for different fund profiles.
+
+---
+
+## 📖 Citation
+
+```{r}
+citation("CausalInvestData")
+```
