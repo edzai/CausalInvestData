@@ -32,6 +32,9 @@ articles:
   - title: Heterogeneous Effects
     contents:
       - heterogeneous-effects
+  - title: Time-Series Impact
+    contents:
+      - causal-impact
 
 reference:
   - title: Datasets

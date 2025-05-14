@@ -2,8 +2,9 @@ pandoc: '3.4'
 pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
+  causal-impact: causal-impact.html
   causal-methods-overview: causal-methods-overview.html
   data-visuals: data-visuals.html
   heterogeneous-effects: heterogeneous-effects.html
   intro: intro.html
-last_built: 2025-05-14T01:43Z
+last_built: 2025-05-14T01:46Z

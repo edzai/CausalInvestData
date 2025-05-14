@@ -1,0 +1,99 @@
+---
+title: "Causal Time-Series Impact Analysis"
+output: rmarkdown::html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(CausalInvestData)
+library(dplyr)
+library(ggplot2)
+```
+
+## 📅 Causal Time-Series Impact Analysis
+
+Causal impact analysis estimates how an intervention affects an outcome over time. In financial settings, this might reflect the effect of a policy change, economic shock, or strategy shift.
+
+---
+
+## 📦 Load the Macro Shocks Dataset
+
+```{r}
+data("macro_shocks")
+head(macro_shocks)
+```
+
+We’ll simulate an intervention (e.g. policy shock) occurring at time point 80.
+
+---
+
+## 🧪 Create Pre/Post-Intervention Periods
+
+```{r}
+macro_shocks <- macro_shocks %>%
+  mutate(time = row_number(),
+         intervention = ifelse(time >= 80, 1, 0))
+```
+
+---
+
+## 📈 Plot the Time Series
+
+```{r}
+ggplot(macro_shocks, aes(x = date, y = market_index)) +
+  geom_line() +
+  geom_vline(xintercept = macro_shocks$date[80], linetype = "dashed", color = "red") +
+  labs(title = "Market Index with Simulated Intervention at Month 80",
+       x = "Date", y = "Market Index") +
+  theme_minimal()
+```
+
+---
+
+## ⚙️ Estimate Counterfactual Using Linear Regression
+
+```{r}
+pre_data <- macro_shocks %>% filter(intervention == 0)
+post_data <- macro_shocks %>% filter(intervention == 1)
+
+model <- lm(market_index ~ interest_rate + gdp_growth, data = pre_data)
+post_data$predicted <- predict(model, newdata = post_data)
+
+ggplot(post_data, aes(x = date)) +
+  geom_line(aes(y = market_index), color = "blue") +
+  geom_line(aes(y = predicted), color = "orange", linetype = "dashed") +
+  labs(title = "Observed vs Counterfactual Post-Intervention",
+       y = "Market Index", x = "Date") +
+  theme_minimal()
+```
+
+---
+
+## 🧾 Optional: Use `CausalImpact` Package
+
+If installed:
+
+```r
+# install.packages("CausalImpact")
+# library(CausalImpact)
+
+# ts_data <- ts(macro_shocks$market_index, frequency = 12)
+# ts_covariates <- macro_shocks %>% select(interest_rate, gdp_growth)
+# impact <- CausalImpact(cbind(ts_data, ts_covariates), 1, 79)
+# plot(impact)
+# summary(impact)
+```
+
+---
+
+## ✅ Conclusion
+
+Using even simple pre/post modeling, we can estimate what the market index might have looked like had the "shock" not occurred. This approach helps analysts measure the **causal effect of real-world events** over time.
+
+---
+
+## 📖 Citation
+
+```{r}
+citation("CausalInvestData")
+```
