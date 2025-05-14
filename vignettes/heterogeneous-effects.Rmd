@@ -1,99 +1,63 @@
 ---
-title: "Heterogeneous Treatment Effects"
+title: "Heterogeneous Treatment Effects (HTE)"
 output: rmarkdown::html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(CausalInvestData)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(dplyr)
 library(ggplot2)
 ```
 
-## 🧪 What Are Heterogeneous Treatment Effects?
+## 🔍 Understanding Heterogeneous Treatment Effects (HTE)
 
-Heterogeneous Treatment Effects (HTEs) occur when the impact of a treatment varies across different units or subgroups in the population. In financial decision-making, understanding **who benefits more (or less)** from a given strategy can be more useful than knowing the average effect.
-
-We’ll explore this using the `fund_performance` dataset.
+HTE refers to variation in treatment effects across individuals or subgroups. Capturing this variation is key for personalized policy, targeting, and fairness in decision-making.
 
 ---
 
-## 📦 Load the Data
+## 1. 🧪 Simulate HTE Data
 
 ```{r}
-data("fund_performance")
-head(fund_performance)
-```
+set.seed(123)
+n <- 1000
+X1 <- rnorm(n)
+X2 <- rbinom(n, 1, 0.5)
+tau <- 1 + 0.5 * X1 - 0.5 * X2  # treatment effect varies by X1 and X2
+W <- rbinom(n, 1, 0.5)
+Y <- tau * W + X1 + X2 + rnorm(n)
 
-Let’s inspect how treatment effects differ by levels of `beta` (a proxy for fund risk exposure):
-
----
-
-## 📊 Stratify by Fund Beta Quantiles
-
-```{r}
-fund_performance <- fund_performance %>%
-  mutate(beta_group = ntile(beta, 3))  # low, medium, high
-
-group_summary <- fund_performance %>%
-  group_by(beta_group, treatment) %>%
-  summarise(mean_return = mean(return), .groups = "drop")
-
-group_summary %>%
-  tidyr::pivot_wider(names_from = treatment, values_from = mean_return,
-                     names_prefix = "treatment_") %>%
-  mutate(estimated_effect = treatment_1 - treatment_0)
+df <- data.frame(X1, X2, W, Y, tau)
 ```
 
 ---
 
-## 📈 Visualize Treatment Effects by Risk Exposure
+## 2. 📊 Visualize True vs. Observed Effects
 
 ```{r}
-group_summary %>%
-  ggplot(aes(x = factor(beta_group), y = mean_return, fill = factor(treatment)))
-  geom_col(position = "dodge")
-  labs(title = "Returns by Treatment Across Beta Groups",
-       x = "Beta Quantile Group", y = "Mean Return",
-       fill = "Treatment")
+group_summary <- df %>%
+  group_by(X2) %>%
+  summarise(treated = mean(Y[W == 1]),
+            control = mean(Y[W == 0]),
+            estimated_effect = treated - control)
+
+ggplot(group_summary, aes(x = factor(X2), y = estimated_effect)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Estimated Effects by Subgroup (X2)",
+       x = "X2 Subgroup", y = "Estimated Effect") +
   theme_minimal()
-```
-
----
-
-## 🌲 Optional: Use Causal Forests (`grf`)
-
-If you have the `grf` package installed, you can run:
-
-```r
-# Uncomment and install if needed
-# install.packages("grf")
-
-# library(grf)
-# X <- fund_performance %>% select(market_return, alpha, beta)
-# Y <- fund_performance$return
-# W <- fund_performance$treatment
-# forest <- causal_forest(X, Y, W)
-# tau_hat <- predict(forest)$predictions
-# hist(tau_hat, breaks = 30, main = "Estimated Treatment Effects (GRF)", xlab = "tau_hat")
 ```
 
 ---
 
 ## ✅ Summary
 
-| Subgroup (by beta) | Estimated Effect |
-|--------------------|------------------|
-| Low beta funds     | ?                |
-| Mid beta funds     | ?                |
-| High beta funds    | ?                |
-
-Even without advanced ML, subgroup analysis reveals **important insights** on how treatments work differently for different fund profiles.
+- HTE models allow tailoring interventions
+- Naive subgroup analysis can lead to bias
+- Use methods like **causal forests** or **DML** for robust HTE estimation
 
 ---
 
-## 📖 Citation
+## 📖 References
 
-```{r}
-citation("CausalInvestData")
-```
+- Athey & Imbens (2016). *Recursive Partitioning for Heterogeneous Causal Effects*
+- Hahn et al. (2020). *Bayesian Causal Forests*
