@@ -1,4 +1,28 @@
-url: ~
+home:
+  title: CausalInvestData
+  tagline: Simulated Datasets for Causal Inference in Investment Management
+
 template:
   bootstrap: 5
+  bootswatch: flatly
 
+navbar:
+  structure:
+    left:
+      - home
+      - reference
+      - articles
+
+articles:
+  - title: Introduction
+    contents:
+      - intro
+
+reference:
+  - title: Datasets
+    desc: Access and explore the included simulated datasets
+    contents:
+      - fund_performance
+      - portfolio_allocations
+      - client_behavior
+      - macro_shocks
