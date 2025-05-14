@@ -44,6 +44,9 @@ articles:
   - title: Instrumental Variables
     contents:
       - instrumental-variables
+  - title: Sensitivity Analysis
+    contents:
+      - sensitivity-analysis
 
 reference:
   - title: Datasets
@@ -53,4 +56,3 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
-      
