@@ -35,6 +35,9 @@ articles:
   - title: Time-Series Impact
     contents:
       - causal-impact
+  - title: Simulate Causal Data
+    contents:
+      - simulate-causal-data
 
 reference:
   - title: Datasets
