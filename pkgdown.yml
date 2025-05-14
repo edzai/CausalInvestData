@@ -2,5 +2,20 @@ pandoc: 3.1.11
 pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
+  bayesian-causal-forests: bayesian-causal-forests.html
+  causal-discovery: causal-discovery.html
+  causal-methods-overview: causal-methods-overview.html
+  covariate-balance-diagnostics: covariate-balance-diagnostics.html
+  dags-and-assumptions: dags-and-assumptions.html
+  data-visuals: data-visuals.html
+  difference-in-differences: difference-in-differences.html
+  double-machine-learning: double-machine-learning.html
+  front-door-criterion: front-door-criterion.html
+  instrumental-variables: instrumental-variables.html
   intro: intro.html
-last_built: 2025-05-14T01:26Z
+  natural-experiments: natural-experiments.html
+  propensity-score-weighting: propensity-score-weighting.html
+  sensitivity-analysis: sensitivity-analysis.html
+  simulate-causal-data: simulate-causal-data.html
+  synthetic-control-methods: synthetic-control-methods.html
+last_built: 2025-05-14T07:28Z
