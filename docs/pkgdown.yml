@@ -7,10 +7,11 @@ articles:
   causal-methods-overview: causal-methods-overview.html
   dags-and-assumptions: dags-and-assumptions.html
   data-visuals: data-visuals.html
+  difference-in-differences: difference-in-differences.html
   heterogeneous-effects: heterogeneous-effects.html
   instrumental-variables: instrumental-variables.html
   intro: intro.html
   natural-experiments: natural-experiments.html
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
-last_built: 2025-05-14T02:42Z
+last_built: 2025-05-14T02:45Z

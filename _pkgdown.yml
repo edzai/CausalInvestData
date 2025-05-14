@@ -53,6 +53,9 @@ articles:
   - title: Natural Experiments
     contents:
       - natural-experiments
+  - title: Difference-in-Differences
+    contents:
+      - difference-in-differences
 
 reference:
   - title: Datasets
