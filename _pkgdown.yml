@@ -1,6 +1,9 @@
 home:
   title: CausalInvestData
   tagline: Simulated Datasets for Causal Inference in Investment Management
+  links:
+    - text: Acalytica
+      href: https://acalytica.com
 
 template:
   bootstrap: 5
