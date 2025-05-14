@@ -71,6 +71,9 @@ articles:
   - title: Covariate Balance Diagnostics
     contents:
       - covariate-balance-diagnostics
+  - title: Bayesian Causal Forests
+    contents:
+      - bayesian-causal-forests
 
 reference:
   - title: Datasets
