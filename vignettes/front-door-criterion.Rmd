@@ -1,0 +1,90 @@
+---
+title: "Front-door Criterion: Explaining Causal Paths Through Mediators"
+output: rmarkdown::html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(dplyr)
+library(ggplot2)
+```
+
+## 🚪 Front-door Criterion in Causal Inference
+
+The **front-door criterion** allows causal identification even when there is an unmeasured confounder between the treatment and outcome — provided we can observe a **mediator** that fully transmits the causal path.
+
+---
+
+## 1. 🎯 Simulate Front-door Data
+
+```{r}
+set.seed(42)
+n <- 1000
+
+U <- rnorm(n)                # Unobserved confounder
+X <- 0.5 * U + rnorm(n)      # Treatment influenced by U
+M <- 1.5 * X + rnorm(n)      # Mediator influenced by X
+Y <- 2 * M + 0.5 * U + rnorm(n)  # Outcome influenced by M and U
+
+df <- data.frame(X, M, Y)
+head(df)
+```
+
+---
+
+## 2. ⚠️ Naive Regression is Biased
+
+```{r}
+naive_model <- lm(Y ~ X, data = df)
+summary(naive_model)
+```
+
+---
+
+## 3. 🧠 Estimate Causal Effect Using Front-door Formula
+
+```{r}
+model_M_X <- lm(M ~ X, data = df)
+model_Y_M <- lm(Y ~ M, data = df)
+
+beta_M_X <- coef(model_M_X)["X"]
+beta_Y_M <- coef(model_Y_M)["M"]
+
+frontdoor_effect <- beta_M_X * beta_Y_M
+cat("Estimated Front-door Effect:", round(frontdoor_effect, 2))
+```
+
+---
+
+## 4. 📈 Visualize Causal Chain
+
+```{r}
+ggplot(df, aes(x = X, y = M)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Path A: Treatment to Mediator", x = "Treatment (X)", y = "Mediator (M)") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(df, aes(x = M, y = Y)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Path B: Mediator to Outcome", x = "Mediator (M)", y = "Outcome (Y)") +
+  theme_minimal()
+```
+
+---
+
+## ✅ Assumptions for Front-door Identification
+
+- All **directed paths** from X to Y go through M
+- No unmeasured confounders of X → M and M → Y
+- X must have a causal effect on M
+
+---
+
+## 📖 References
+
+- Pearl, J. (2009). *Causality: Models, Reasoning, and Inference*
+- Textor et al. (2016). *dagitty: Graphical Analysis of Structural Causal Models*
