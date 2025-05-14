@@ -4,7 +4,6 @@
 > Simulated datasets for causal inference in institutional investment
 > management.
 
-<<<<<<< HEAD
 `CausalInvestData` provides realistic datasets to help researchers and
 analysts test causal inference methods such as matching, propensity
 score weighting, causal forests, and time-series modeling in a financial
@@ -16,7 +15,7 @@ context.
 - `portfolio_allocations`: Allocation strategies and performance
 - `client_behavior`: Client demographics, treatment, and churn
 - `macro_shocks`: Macroeconomic indicators and shocks
-=======
+
 `CausalInvestData` provides realistic, structured datasets to help
 researchers and analysts test causal inference methods such as matching,
 propensity score weighting, causal forests, and time-series modeling in
@@ -35,31 +34,29 @@ a financial context.
 # Install development version from GitHub
 devtools::install_github("edzai/CausalInvestData")
 ```
->>>>>>> ea41305dafb9cb580aa27a441588b4b9b90152e1
+
 
 ## 📊 Example Usage
 
 ``` r
 library(CausalInvestData)
-<<<<<<< HEAD
 
 # Load the fund performance data
 data("fund_performance")
 head(fund_performance)
 
 # Propensity Score Matching
-=======
 data(fund_performance)
 head(fund_performance)
 
 # Estimate treatment effect using matching
->>>>>>> ea41305dafb9cb580aa27a441588b4b9b90152e1
+
 library(MatchIt)
 m.out <- matchit(treatment ~ market_return + alpha + beta, data = fund_performance)
 summary(m.out)
 ```
 
-<<<<<<< HEAD
+
 ## 📁 Dataset Preview
 
 ``` r
@@ -83,7 +80,7 @@ citation("CausalInvestData")
 
 Pull requests and bug reports are welcome at
 <https://github.com/edzai/CausalInvestData>
-=======
+
 ## 📁 Available Datasets
 
 | Dataset                 | Description                                  |
@@ -113,4 +110,4 @@ MIT © [Edzai Conilias Zvobwo](https://github.com/edzai)
 
 Pull requests, bug reports, and discussions welcome. Open an issue or
 fork this repo to suggest improvements.
->>>>>>> ea41305dafb9cb580aa27a441588b4b9b90152e1
+
