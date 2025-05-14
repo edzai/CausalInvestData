@@ -97,9 +97,15 @@ is limited or exploratory analysis is needed.</p>
 <span><span class="st">  X -&gt; Y</span></span>
 <span><span class="st">}"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ggdag</span><span class="op">(</span><span class="va">true_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"True DAG Used to Generate Data"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ggdag</span><span class="op">(</span><span class="va">true_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"True DAG Used to Generate Data"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## $title</span></span>
+<span><span class="co">## [1] "True DAG Used to Generate Data"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## attr(,"class")</span></span>
+<span><span class="co">## [1] "labels"</span></span></code></pre>
 <hr>
 </div>
 <div class="section level2">
@@ -107,7 +113,7 @@ is limited or exploratory analysis is needed.</p>
 </h2>
 <p>We use <code><a href="https://rdrr.io/pkg/dagitty/man/localTests.html" class="external-link">dagitty::localTests()</a></code> to test conditional
 independence statements implied by a candidate DAG:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_result</span> <span class="op">&lt;-</span> <span class="fu">localTests</span><span class="op">(</span><span class="va">true_dag</span>, data <span class="op">=</span> <span class="va">df</span>, type <span class="op">=</span> <span class="st">"cis"</span><span class="op">)</span></span>
 <span><span class="va">test_result</span></span></code></pre></div>
 <pre><code><span><span class="co">## data frame with 0 columns and 0 rows</span></span></code></pre>
@@ -118,18 +124,24 @@ independence statements implied by a candidate DAG:</p>
 <div class="section level2">
 <h2 id="try-an-incorrect-dag">4. 🧪 Try an Incorrect DAG<a class="anchor" aria-label="anchor" href="#try-an-incorrect-dag"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wrong_dag</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span><span class="st">"dag {</span></span>
 <span><span class="st">  Z -&gt; X</span></span>
 <span><span class="st">  Z -&gt; Y</span></span>
 <span><span class="st">  X -&gt; Y</span></span>
 <span><span class="st">}"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ggdag</span><span class="op">(</span><span class="va">wrong_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Incorrect DAG Assumption"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ggdag</span><span class="op">(</span><span class="va">wrong_dag</span>, layout <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="causal-discovery_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Incorrect DAG Assumption"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## $title</span></span>
+<span><span class="co">## [1] "Incorrect DAG Assumption"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## attr(,"class")</span></span>
+<span><span class="co">## [1] "labels"</span></span></code></pre>
 <p>Now test:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">localTests</span><span class="op">(</span><span class="va">wrong_dag</span>, data <span class="op">=</span> <span class="va">df</span>, type <span class="op">=</span> <span class="st">"cis"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## data frame with 0 columns and 0 rows</span></span></code></pre>
 <p>Look for failed assumptions (very low p-values).</p>
