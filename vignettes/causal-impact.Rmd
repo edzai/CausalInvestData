@@ -1,0 +1,60 @@
+---
+title: "Causal Impact Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Causal Impact Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(CausalImpact)
+library(ggplot2)
+```
+
+# 📊 Causal Impact Analysis
+
+Causal Impact is a Bayesian structural time-series method used to evaluate the effect of an intervention when randomization is not feasible.
+
+---
+
+## 🧪 Simulate Pre/Post Intervention Time Series
+
+```{r}
+set.seed(101)
+n <- 100
+pre_period <- 1:70
+post_period <- 71:100
+
+x <- arima.sim(model = list(order = c(1, 0, 0), ar = 0.8), n = n)
+y <- x + rnorm(n, 0, 0.5)
+
+# Add treatment effect in post period
+y[post_period] <- y[post_period] + 2
+
+data_ts <- cbind(y, x)
+```
+
+---
+
+## 📈 Run Causal Impact
+
+```{r}
+impact <- CausalImpact(data_ts, pre.period = c(1, 70), post.period = c(71, 100))
+summary(impact)
+plot(impact)
+```
+
+---
+
+## ✅ Interpretation
+
+- **CausalImpact** estimates the counterfactual (what would’ve happened without intervention).
+- The difference between observed and predicted is the estimated effect.
+
+---
+
+## 📚 References
+
+- Brodersen et al. (2015). *Inferring causal impact using Bayesian structural time-series models*. Annals of Applied Statistics.

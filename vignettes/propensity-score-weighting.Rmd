@@ -1,18 +1,89 @@
 ---
-title: "Propensity Score Weighting"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Propensity Score Weighting}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "Propensity Score Weighting (PSW) for Causal Inference"
+output: rmarkdown::html_document
 ---
 
-# Propensity Score Weighting
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(ggplot2)
+library(survey)
 ```
 
-## Overview of Propensity Score Weighting
+## ⚖️ Propensity Score Weighting (PSW)
 
-Content goes here...
+PSW is a technique used to adjust for confounding in observational studies by **reweighting units** based on their estimated probability of receiving treatment.
+
+---
+
+## 1. 🧪 Simulate Confounded Data
+
+```{r}
+set.seed(123)
+n <- 1000
+
+X1 <- rnorm(n)
+X2 <- rbinom(n, 1, 0.5)
+logit_p <- -0.5 + 0.7 * X1 + 1.2 * X2
+p_treat <- 1 / (1 + exp(-logit_p))
+W <- rbinom(n, 1, p_treat)
+
+# True treatment effect is 3
+Y <- 3 * W + 0.5 * X1 + 0.8 * X2 + rnorm(n)
+
+data <- data.frame(X1, X2, W, Y)
+head(data)
+```
+
+---
+
+## 2. 🎯 Estimate Propensity Scores
+
+```{r}
+ps_model <- glm(W ~ X1 + X2, data = data, family = binomial())
+data$pscore <- predict(ps_model, type = "response")
+```
+
+---
+
+## 3. ⚖️ Compute Weights (Inverse Probability of Treatment Weights)
+
+```{r}
+data$wt <- ifelse(data$W == 1, 1 / data$pscore, 1 / (1 - data$pscore))
+summary(data$wt)
+```
+
+---
+
+## 4. 🧮 Estimate Weighted Treatment Effect
+
+```{r}
+design <- svydesign(ids = ~1, weights = ~wt, data = data)
+model_psw <- svyglm(Y ~ W, design = design)
+summary(model_psw)
+```
+
+---
+
+## 5. 📊 Visualize Propensity Score Overlap
+
+```{r}
+ggplot(data, aes(x = pscore, fill = factor(W)))
+  geom_density(alpha = 0.5)
+  labs(title = "Propensity Score Distribution by Treatment",
+       x = "Propensity Score", fill = "Treatment")
+  theme_minimal()
+```
+
+---
+
+## ✅ Summary
+
+PSW reduces confounding by **balancing covariates** across treatment groups, allowing us to estimate causal effects in non-randomized data.
+
+---
+
+## 📖 References
+
+- Rosenbaum & Rubin (1983). *The Central Role of the Propensity Score in Observational Studies*
+- Stuart (2010). *Matching Methods for Causal Inference: A Review and a Look Forward*

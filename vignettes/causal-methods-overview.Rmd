@@ -1,18 +1,82 @@
 ---
-title: "Causal Methods Overview"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Causal Methods Overview}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "Causal Inference Methods Overview"
+output: rmarkdown::html_document
 ---
 
-# Causal Methods Overview
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(CausalInvestData)
+library(dplyr)
+library(ggplot2)
+library(MatchIt)
 ```
 
-## Overview of Causal Methods
+## 🧠 What is Causal Inference?
 
-Content goes here...
+Causal inference is the process of estimating the **effect of an intervention or treatment** on an outcome. Unlike correlation, causal inference requires assumptions about how data was generated.
+
+In this article, we use the `fund_performance` dataset to illustrate common methods.
+
+```{r}
+data("fund_performance")
+head(fund_performance)
+```
+
+---
+
+## ⚖️ 1. Naive Difference in Means
+
+This method assumes random treatment assignment.
+
+```{r}
+fund_performance %>%
+  group_by(treatment) %>%
+  summarise(mean_return = mean(return))
+```
+
+---
+
+## 🎯 2. Propensity Score Matching (PSM)
+
+PSM attempts to create a balanced dataset by matching treated and control units on their probability of receiving treatment.
+
+```{r}
+psm <- matchit(treatment ~ market_return + alpha + beta, data = fund_performance, method = "nearest")
+summary(psm)
+```
+
+Check matched data:
+
+```{r}
+matched_data <- match.data(psm)
+ggplot(matched_data, aes(x = return, fill = factor(treatment)))
+  geom_density(alpha = 0.5)
+  labs(title = "Return Distribution After Matching", fill = "Treatment")
+  theme_minimal()
+```
+
+---
+
+## 🌲 3. Causal Forests (Optional)
+
+You can also use more advanced estimators like **causal forests** (via the `grf` package). These are not covered here but can estimate heterogeneous treatment effects.
+
+Install and explore here: [https://grf-labs.github.io/grf/](https://grf-labs.github.io/grf/)
+
+---
+
+## 📌 Summary
+
+| Method                     | When to Use                                   |
+|---------------------------|-----------------------------------------------|
+| Naive Difference-in-Means | Randomized experiments                        |
+| Propensity Score Matching | Observational studies with covariate overlap  |
+| Causal Forests             | Heterogeneous treatment effects               |
+
+---
+
+## 📖 Citation
+
+```{r}
+citation("CausalInvestData")
+```

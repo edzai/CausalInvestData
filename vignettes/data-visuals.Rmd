@@ -1,77 +1,48 @@
 ---
-title: "Data Visuals for Causal Inference"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Data Visuals for Causal Inference}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "Dataset Visualizations"
+output: rmarkdown::html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+library(CausalInvestData)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 ```
 
-# 📊 Data Visualizations for Causal Inference
-
-This vignette demonstrates useful plots commonly used in causal analysis and diagnostics.
-
----
-
-## 1. 🎯 Treatment Group Distributions
+## 📈 Fund Performance Distribution
 
 ```{r}
-set.seed(123)
-n <- 500
-df <- data.frame(
-  treatment = factor(rbinom(n, 1, 0.5), labels = c("Control", "Treated")),
-  age = rnorm(n, mean = 35, sd = 10)
-)
+data("fund_performance")
 
-ggplot(df, aes(x = age, fill = treatment)) +
-  geom_density(alpha = 0.5) +
-  labs(title = "Age Distribution by Treatment Group",
-       x = "Age", y = "Density", fill = "Group") +
+ggplot(fund_performance, aes(x = return, fill = factor(treatment)))
+  geom_histogram(alpha = 0.7, bins = 40, position = "identity")
+  labs(title = "Distribution of Fund Returns by Treatment",
+       x = "Return", y = "Count", fill = "Treatment")
   theme_minimal()
 ```
 
----
-
-## 2. 🔁 Covariate Balance Before Matching
+## 🧮 Client Behavior: Correlation of Features
 
 ```{r}
-df <- df %>%
-  mutate(
-    income = ifelse(treatment == "Treated", rnorm(n, 60000, 10000), rnorm(n, 50000, 10000))
-  )
+data("client_behavior")
 
-ggplot(df, aes(x = income, fill = treatment)) +
-  geom_density(alpha = 0.5) +
-  labs(title = "Income Distribution Before Matching",
-       x = "Income", y = "Density", fill = "Group") +
-  theme_minimal()
+client_behavior %>%
+  select(age, income, satisfaction_score) %>%
+  GGally::ggpairs(title = "Correlation Matrix of Client Features")
 ```
 
----
-
-## 3. 🧮 Outcome by Group
+## 📆 Macro Shocks Over Time
 
 ```{r}
-df <- df %>%
-  mutate(
-    outcome = ifelse(treatment == "Treated", income * 0.0009 + rnorm(n), income * 0.0007 + rnorm(n))
-  )
+data("macro_shocks")
 
-ggplot(df, aes(x = treatment, y = outcome, fill = treatment)) +
-  geom_boxplot() +
-  labs(title = "Outcome by Treatment Group",
-       x = "Group", y = "Outcome") +
+macro_shocks %>%
+  pivot_longer(cols = c("interest_rate", "gdp_growth", "market_index")) %>%
+  ggplot(aes(x = date, y = value, color = name))
+  geom_line()
+  facet_wrap(~ name, scales = "free_y")
   theme_minimal()
+  labs(title = "Macro Shocks Over Time", y = "Value", x = "Date")
 ```
-
----
-
-## ✅ Summary
-
-These plots illustrate key steps in visualizing distributions, assessing covariate balance, and comparing treatment outcomes.
