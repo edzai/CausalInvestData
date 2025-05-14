@@ -4,3 +4,11 @@
 ^\.github$
 ^doc$
 ^Meta$
+^README\.Rmd$
+^README\.html$
+^index\.md$
+^index\.html$
+^analytics\.html$
+^EXPLAINER\.md$
+.DS_Store
+
