@@ -1,0 +1,68 @@
+---
+title: "Covariate Balance Diagnostics in Causal Inference"
+output: rmarkdown::html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(dplyr)
+library(ggplot2)
+library(MatchIt)
+library(cobalt)
+```
+
+## ⚖️ Covariate Balance Diagnostics
+
+Ensuring that covariates are balanced across treatment groups is critical for reducing bias in causal inference. Diagnostics help verify whether matching or weighting strategies have achieved this.
+
+---
+
+## 1. 🧪 Simulate Confounded Data
+
+```{r}
+set.seed(123)
+n <- 1000
+
+X1 <- rnorm(n)
+X2 <- rbinom(n, 1, 0.5)
+logit_p <- -0.5 + 0.7 * X1 + 1.2 * X2
+p_treat <- 1 / (1 + exp(-logit_p))
+W <- rbinom(n, 1, p_treat)
+
+Y <- 3 * W + 0.5 * X1 + 0.8 * X2 + rnorm(n)
+data <- data.frame(X1, X2, W, Y)
+```
+
+---
+
+## 2. 🎯 Perform Propensity Score Matching
+
+```{r}
+match_model <- matchit(W ~ X1 + X2, data = data, method = "nearest", distance = "logit")
+summary(match_model)
+```
+
+---
+
+## 3. 📊 Balance Diagnostics with `cobalt`
+
+```{r}
+love.plot(match_model, binary = "std", var.order = "unadjusted",
+          abs = TRUE, thresholds = c(m = .1),
+          title = "Covariate Balance Before and After Matching")
+```
+
+---
+
+## 4. ✅ Interpreting Balance Metrics
+
+- **Standardized Mean Differences (SMD)**: < 0.1 considered balanced
+- Look for reduction in SMD after matching
+- Avoid overfitting and extreme weights
+
+---
+
+## 📖 References
+
+- Austin (2009). *Balance diagnostics for comparing the distribution of baseline covariates using standardized differences*
+- Stuart (2010). *Matching Methods for Causal Inference: A Review and a Look Forward*

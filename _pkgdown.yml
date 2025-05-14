@@ -68,6 +68,9 @@ articles:
   - title: Double Machine Learning
     contents:
       - double-machine-learning
+  - title: Covariate Balance Diagnostics
+    contents:
+      - covariate-balance-diagnostics
 
 reference:
   - title: Datasets
@@ -77,5 +80,3 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
-
-      
