@@ -4,7 +4,6 @@ pkgdown_sha: ~
 articles:
   bayesian-causal-forests: bayesian-causal-forests.html
   causal-discovery: causal-discovery.html
-  causal-impact: causal-impact.html
   causal-methods-overview: causal-methods-overview.html
   covariate-balance-diagnostics: covariate-balance-diagnostics.html
   dags-and-assumptions: dags-and-assumptions.html
@@ -12,7 +11,6 @@ articles:
   difference-in-differences: difference-in-differences.html
   double-machine-learning: double-machine-learning.html
   front-door-criterion: front-door-criterion.html
-  heterogeneous-effects: heterogeneous-effects.html
   instrumental-variables: instrumental-variables.html
   intro: intro.html
   mediation-analysis: mediation-analysis.html
@@ -21,4 +19,4 @@ articles:
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
   synthetic-control-methods: synthetic-control-methods.html
-last_built: 2025-05-14T04:05Z
+last_built: 2025-05-14T04:19Z

@@ -19,63 +19,34 @@ navbar:
       - articles
 
 articles:
-  - title: Introduction
+  - title: Foundations
     contents:
       - intro
-  - title: Dataset Visualizations
-    contents:
       - data-visuals
-  - title: Causal Inference Methods
-    contents:
-      - causal-methods-overview
-  - title: Heterogeneous Effects
-    contents:
-      - heterogeneous-effects
-  - title: Time-Series Impact
-    contents:
-      - causal-impact
-  - title: Simulate Causal Data
-    contents:
-      - simulate-causal-data
-  - title: DAGs and Assumptions
-    contents:
       - dags-and-assumptions
-  - title: Instrumental Variables
-    contents:
-      - instrumental-variables
-  - title: Sensitivity Analysis
-    contents:
-      - sensitivity-analysis
-  - title: Causal Discovery
-    contents:
-      - causal-discovery
-  - title: Natural Experiments
-    contents:
-      - natural-experiments
-  - title: Difference-in-Differences
-    contents:
-      - difference-in-differences
-  - title: Front-door Criterion
-    contents:
-      - front-door-criterion
-  - title: Propensity Score Weighting
+      - causal-methods-overview
+
+  - title: Core Estimation Methods
     contents:
       - propensity-score-weighting
-  - title: Synthetic Control Methods
-    contents:
-      - synthetic-control-methods
-  - title: Double Machine Learning
-    contents:
-      - double-machine-learning
-  - title: Covariate Balance Diagnostics
-    contents:
       - covariate-balance-diagnostics
-  - title: Bayesian Causal Forests
-    contents:
-      - bayesian-causal-forests
-  - title: Mediation Analysis
+      - difference-in-differences
+      - natural-experiments
+      - front-door-criterion
+      - instrumental-variables
+
+  - title: Advanced Techniques
     contents:
       - mediation-analysis
+      - double-machine-learning
+      - bayesian-causal-forests
+      - synthetic-control-methods
+
+  - title: Practical Tools & Simulation
+    contents:
+      - simulate-causal-data
+      - causal-discovery
+      - sensitivity-analysis
 
 reference:
   - title: Datasets
@@ -85,5 +56,4 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
-
       
