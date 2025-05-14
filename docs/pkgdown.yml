@@ -13,9 +13,9 @@ articles:
   double-machine-learning: double-machine-learning.html
   front-door-criterion: front-door-criterion.html
   instrumental-variables: instrumental-variables.html
+  intro: intro.html
   natural-experiments: natural-experiments.html
   propensity-score-weighting: propensity-score-weighting.html
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
-  synthetic-control-methods: synthetic-control-methods.html
-last_built: 2025-05-14T09:18Z
+last_built: 2025-05-14T10:18Z

@@ -1,56 +1,42 @@
-home:
-  title: CausalInvestData
-  tagline: Simulated Datasets for Causal Inference in Investment Management
-  strip_header: false
-  sidebar: false
-
 template:
   bootstrap: 5
-  bootswatch: flatly
-  includes:
-    after_body: analytics.html
 
 navbar:
-  structure:
-    left:
-      - home
-      - reference
-      - articles
+  title: "CausalInvestData"
+  left:
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Articles"
+      href: articles/index.html
+  right:
+    - icon: fa-github
+      href: https://github.com/edzai/CausalInvestData
 
 articles:
-  - title: Foundations
+  - title: "Getting Started"
     contents:
       - intro
-      - data-visuals
-      - dags-and-assumptions
-      - causal-methods-overview
 
-  - title: Core Estimation Methods
+  - title: "Causal Methods"
     contents:
-      - propensity-score-weighting
-      - covariate-balance-diagnostics
+      - causal-methods-overview
       - difference-in-differences
-      - natural-experiments
+      - propensity-score-weighting
       - front-door-criterion
       - instrumental-variables
-
-  - title: Advanced Techniques
-    contents:
       - double-machine-learning
+      - natural-experiments
+      - causal-impact
+
+  - title: "Advanced Topics"
+    contents:
       - bayesian-causal-forests
-      - synthetic-control-methods
-
-  - title: Practical Tools & Simulation
-    contents:
-      - simulate-causal-data
       - causal-discovery
+      - simulate-causal-data
       - sensitivity-analysis
+      - dags-and-assumptions
 
-reference:
-  - title: Datasets
-    desc: Access and explore the included simulated datasets
+  - title: "Diagnostics & Visuals"
     contents:
-      - fund_performance
-      - portfolio_allocations
-      - client_behavior
-      - macro_shocks
+      - covariate-balance-diagnostics
+      - data-visuals
