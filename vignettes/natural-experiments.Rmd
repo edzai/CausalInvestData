@@ -1,0 +1,85 @@
+---
+title: "Natural Experiments and Quasi-Random Variation"
+output: rmarkdown::html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(dplyr)
+library(ggplot2)
+```
+
+## 🌍 Natural Experiments in Causal Inference
+
+Natural experiments use **external, unplanned variation** to estimate causal effects when randomization is not possible. Examples include policy changes, eligibility cutoffs, or geographic variation.
+
+---
+
+## 1. 🎯 Simulate a Sharp Cutoff (e.g., policy eligibility at age 60)
+
+```{r}
+set.seed(42)
+n <- 1000
+age <- runif(n, 50, 70)
+treatment <- ifelse(age >= 60, 1, 0)
+noise <- rnorm(n)
+Y <- 3 * treatment + 0.1 * age + noise  # treatment has causal effect of 3
+
+df <- data.frame(age, treatment, Y)
+head(df)
+```
+
+---
+
+## 2. 📊 Visualize the Discontinuity
+
+```{r}
+ggplot(df, aes(x = age, y = Y, color = factor(treatment))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_vline(xintercept = 60, linetype = "dashed", color = "red") +
+  labs(title = "Sharp Regression Discontinuity at Age 60",
+       x = "Age", y = "Outcome", color = "Treatment") +
+  theme_minimal()
+```
+
+---
+
+## 3. 🧪 Estimate Local Treatment Effect Near Cutoff
+
+```{r}
+local_data <- df %>% filter(age >= 58 & age <= 62)
+rd_model <- lm(Y ~ treatment + age, data = local_data)
+summary(rd_model)
+```
+
+---
+
+## 4. ✅ Assumptions of RD Design
+
+- **No manipulation** around the cutoff (check density)
+- **Continuity** in covariates and potential outcomes
+- **Precise cutoff** for assignment
+
+---
+
+## 5. 📚 Real-World Examples
+
+- 🎓 College access based on test scores
+- 💼 Job subsidies based on firm size
+- 💊 Treatment access based on age or income cutoffs
+
+---
+
+## ✅ Summary
+
+Natural experiments leverage real-world variation to estimate causal effects. A sharp **regression discontinuity design** mimics randomization near a cutoff and provides credible causal estimates.
+
+For more robust tools, explore the `rdrobust`, `rdd`, or `rdpower` packages.
+
+---
+
+## 📖 References
+
+- Imbens & Lemieux (2008). *Regression Discontinuity Designs: A Guide to Practice*
+- Angrist & Pischke (2009). *Mostly Harmless Econometrics*

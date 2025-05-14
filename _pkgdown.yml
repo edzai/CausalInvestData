@@ -50,6 +50,9 @@ articles:
   - title: Causal Discovery
     contents:
       - causal-discovery
+  - title: Natural Experiments
+    contents:
+      - natural-experiments
 
 reference:
   - title: Datasets
@@ -59,4 +62,3 @@ reference:
       - portfolio_allocations
       - client_behavior
       - macro_shocks
-      
