@@ -9,6 +9,7 @@ template:
   bootstrap: 5
   bootswatch: flatly
   includes:
+    before_title: hero.html
     after_body: analytics.html
 
 navbar:
