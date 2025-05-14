@@ -1,18 +1,77 @@
 ---
-title: "Data Visuals"
+title: "Data Visuals for Causal Inference"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data Visuals}
+  %\VignetteIndexEntry{Data Visuals for Causal Inference}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-# Data Visuals
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(ggplot2)
+library(dplyr)
 ```
 
-## Overview of Data Visuals
+# 📊 Data Visualizations for Causal Inference
 
-Content goes here...
+This vignette demonstrates useful plots commonly used in causal analysis and diagnostics.
+
+---
+
+## 1. 🎯 Treatment Group Distributions
+
+```{r}
+set.seed(123)
+n <- 500
+df <- data.frame(
+  treatment = factor(rbinom(n, 1, 0.5), labels = c("Control", "Treated")),
+  age = rnorm(n, mean = 35, sd = 10)
+)
+
+ggplot(df, aes(x = age, fill = treatment)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Age Distribution by Treatment Group",
+       x = "Age", y = "Density", fill = "Group") +
+  theme_minimal()
+```
+
+---
+
+## 2. 🔁 Covariate Balance Before Matching
+
+```{r}
+df <- df %>%
+  mutate(
+    income = ifelse(treatment == "Treated", rnorm(n, 60000, 10000), rnorm(n, 50000, 10000))
+  )
+
+ggplot(df, aes(x = income, fill = treatment)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Income Distribution Before Matching",
+       x = "Income", y = "Density", fill = "Group") +
+  theme_minimal()
+```
+
+---
+
+## 3. 🧮 Outcome by Group
+
+```{r}
+df <- df %>%
+  mutate(
+    outcome = ifelse(treatment == "Treated", income * 0.0009 + rnorm(n), income * 0.0007 + rnorm(n))
+  )
+
+ggplot(df, aes(x = treatment, y = outcome, fill = treatment)) +
+  geom_boxplot() +
+  labs(title = "Outcome by Treatment Group",
+       x = "Group", y = "Outcome") +
+  theme_minimal()
+```
+
+---
+
+## ✅ Summary
+
+These plots illustrate key steps in visualizing distributions, assessing covariate balance, and comparing treatment outcomes.
