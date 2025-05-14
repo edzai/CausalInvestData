@@ -22,6 +22,9 @@ articles:
   - title: Dataset Visualizations
     contents:
       - data-visuals
+  - title: Causal Inference Methods
+    contents:
+      - causal-methods-overview
 
 reference:
   - title: Datasets
