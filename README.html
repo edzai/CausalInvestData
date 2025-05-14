@@ -607,74 +607,44 @@ padding-top: 0px;
 <p>Simulated datasets for causal inference in institutional investment
 management.</p>
 </blockquote>
-<p><code>CausalInvestData</code> provides realistic, structured datasets
-to help researchers and analysts test causal inference methods such as
-matching, propensity score weighting, causal forests, and time-series
-modeling in a financial context.</p>
-<h2 id="mag-key-features">🔍 Key Features</h2>
+<p><code>CausalInvestData</code> provides realistic datasets to help
+researchers and analysts test causal inference methods such as matching,
+propensity score weighting, causal forests, and time-series modeling in
+a financial context.</p>
+<h2 id="mag-available-datasets">🔍 Available Datasets</h2>
 <ul>
-<li><strong>fund_performance</strong> – treatment effect on mutual fund
-returns</li>
-<li><strong>portfolio_allocations</strong> – allocation strategy
-vs. performance</li>
-<li><strong>client_behavior</strong> – client churn and advisory
-treatment simulation</li>
-<li><strong>macro_shocks</strong> – macroeconomic variables affecting
-asset prices</li>
+<li><code>fund_performance</code>: Simulated mutual fund returns with
+treatment</li>
+<li><code>portfolio_allocations</code>: Allocation strategies and
+performance</li>
+<li><code>client_behavior</code>: Client demographics, treatment, and
+churn</li>
+<li><code>macro_shocks</code>: Macroeconomic indicators and shocks</li>
 </ul>
-<h2 id="package-installation">📦 Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install development version from GitHub</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;edzai/CausalInvestData&quot;</span>)</span></code></pre></div>
 <h2 id="bar_chart-example-usage">📊 Example Usage</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(CausalInvestData)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">data</span>(fund_performance)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">head</span>(fund_performance)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Estimate treatment effect using matching</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">library</span>(MatchIt)</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>m.out <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> market_return <span class="sc">+</span> alpha <span class="sc">+</span> beta, <span class="at">data =</span> fund_performance)</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">summary</span>(m.out)</span></code></pre></div>
-<h2 id="file_folder-available-datasets">📁 Available Datasets</h2>
-<table>
-<thead>
-<tr>
-<th>Dataset</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>fund_performance</code></td>
-<td>Simulates mutual fund returns with treatment</td>
-</tr>
-<tr>
-<td><code>portfolio_allocations</code></td>
-<td>Allocations with different strategies</td>
-</tr>
-<tr>
-<td><code>client_behavior</code></td>
-<td>Client demographics, treatment, and churn</td>
-</tr>
-<tr>
-<td><code>macro_shocks</code></td>
-<td>Time-series of macroeconomic indicators</td>
-</tr>
-</tbody>
-</table>
-<h2 id="test_tube-use-cases">🧪 Use Cases</h2>
-<ul>
-<li>Teaching and learning causal inference</li>
-<li>Prototyping causal ML pipelines in finance</li>
-<li>Publishing reproducible financial causal studies</li>
-</ul>
-<h2 id="open_book-vignette">📖 Vignette</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">browseVignettes</span>(<span class="st">&quot;CausalInvestData&quot;</span>)</span></code></pre></div>
-<h2 id="scroll-license">📜 License</h2>
-<p>MIT © <a href="https://github.com/edzai">Edzai Conilias
-Zvobwo</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(CausalInvestData)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Load the fund performance data</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;fund_performance&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">head</span>(fund_performance)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Propensity Score Matching</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>m.out <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treatment <span class="sc">~</span> market_return <span class="sc">+</span> alpha <span class="sc">+</span> beta, <span class="at">data =</span> fund_performance)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">summary</span>(m.out)</span></code></pre></div>
+<h2 id="file_folder-dataset-preview">📁 Dataset Preview</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;portfolio_allocations&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">head</span>(portfolio_allocations)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;client_behavior&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">head</span>(client_behavior)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;macro_shocks&quot;</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">head</span>(macro_shocks)</span></code></pre></div>
+<h2 id="open_book-citation">📖 Citation</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;CausalInvestData&quot;</span>)</span></code></pre></div>
 <h2 id="raised_hands-contributing">🙌 Contributing</h2>
-<p>Pull requests, bug reports, and discussions welcome. Open an issue or
-fork this repo to suggest improvements.</p>
+<p>Pull requests and bug reports are welcome at <a href="https://github.com/edzai/CausalInvestData">https://github.com/edzai/CausalInvestData</a></p>
 
 </body>
 </html>

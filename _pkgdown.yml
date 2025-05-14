@@ -1,38 +1,4 @@
-<<<<<<< HEAD
-home:
-  title: CausalInvestData
-  tagline: Simulated Datasets for Causal Inference in Investment Management
-
-authors:
-  sidebar:
-    - name: Edzai Conilias Zvobwo
-      url: https://github.com/edzai
-
-template:
-  bootstrap: 5
-  bootswatch: flatly
-  bslib:
-    primary: "#005A9C"
-
-navbar:
-  structure:
-    left:
-      - home
-      - reference
-      - articles
-      - news
-
-reference:
-  - title: Datasets
-    desc: Simulated datasets for causal inference
-    contents:
-      - fund_performance
-      - portfolio_allocations
-      - client_behavior
-      - macro_shocks
-=======
-url: https://edzai.github.io/CausalInvestData/
+url: ~
 template:
   bootstrap: 5
 
->>>>>>> ea41305dafb9cb580aa27a441588b4b9b90152e1
