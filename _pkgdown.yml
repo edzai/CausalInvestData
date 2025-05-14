@@ -38,6 +38,12 @@ articles:
   - title: Simulate Causal Data
     contents:
       - simulate-causal-data
+  - title: DAGs and Assumptions
+    contents:
+      - dags-and-assumptions
+  - title: Instrumental Variables
+    contents:
+      - instrumental-variables
 
 reference:
   - title: Datasets

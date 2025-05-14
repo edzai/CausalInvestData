@@ -4,8 +4,10 @@ pkgdown_sha: ~
 articles:
   causal-impact: causal-impact.html
   causal-methods-overview: causal-methods-overview.html
+  dags-and-assumptions: dags-and-assumptions.html
   data-visuals: data-visuals.html
   heterogeneous-effects: heterogeneous-effects.html
+  instrumental-variables: instrumental-variables.html
   intro: intro.html
   simulate-causal-data: simulate-causal-data.html
-last_built: 2025-05-14T01:50Z
+last_built: 2025-05-14T02:04Z
