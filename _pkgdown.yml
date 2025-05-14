@@ -62,6 +62,9 @@ articles:
   - title: Propensity Score Weighting
     contents:
       - propensity-score-weighting
+  - title: Synthetic Control Methods
+    contents:
+      - synthetic-control-methods
 
 reference:
   - title: Datasets

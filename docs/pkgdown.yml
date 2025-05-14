@@ -16,4 +16,5 @@ articles:
   propensity-score-weighting: propensity-score-weighting.html
   sensitivity-analysis: sensitivity-analysis.html
   simulate-causal-data: simulate-causal-data.html
-last_built: 2025-05-14T02:53Z
+  synthetic-control-methods: synthetic-control-methods.html
+last_built: 2025-05-14T03:04Z
