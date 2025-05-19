@@ -29,6 +29,7 @@ head(fund_performance)
 This method assumes random treatment assignment.
 
 ```{r}
+library(dplyr)
 fund_performance %>%
   group_by(treatment) %>%
   summarise(mean_return = mean(return))
