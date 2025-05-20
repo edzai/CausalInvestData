@@ -3,7 +3,7 @@ title: "Causal Inference Methods Overview"
 output: rmarkdown::html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(CausalInvestData)
 library(dplyr)
